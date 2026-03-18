@@ -8,12 +8,16 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setMessage("");
+    setError("");
     if (password !== confirmPassword) {
-      alert("Passwords do not match");
+      setError("Passwords do not match");
       return;
     }
     try {
@@ -23,15 +27,17 @@ const Register = () => {
         password,
         confirmPassword,
       });
-      alert(res.data?.message || "Account created successfully");
+      setMessage(res.data?.message || "Account created successfully");
       setName("");
       setEmail("");
       setPassword("");
       setConfirmPassword("");
-      navigate("/login");
+      setTimeout(() => {
+        navigate("/login");
+      }, 1500);
     } catch (error) {
       console.error(error);
-      alert(error.response?.data?.message || "Registration failed");
+      setError(error.response?.data?.message || "Registration failed");
     }
   };
   return (
@@ -39,6 +45,8 @@ const Register = () => {
       <div className={styles.card}>
         <h2>Create Account</h2>
         <p>Join TourMate and explore the world!</p>
+        {error && <p className={styles.error}>{error}</p>}
+        {message && <p className={styles.success}>{message}</p>}
         <form onSubmit={handleSubmit}>
           <input
             type="text"

@@ -1,5 +1,5 @@
 .container {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -12,7 +12,7 @@
   padding: 40px;
   border-radius: 10px;
   width: 350px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0, 0.15);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
   text-align: center;
 }
 
@@ -61,12 +61,32 @@
   transition: 0.2s;
 }
 
-.container button:hover{
+.container button:hover {
   background: rgb(0, 86, 210);
 }
 
-.loginText{
-    margin-top: 15px;
-    font-size: 0.9rem;
-    font-weight: 500;
+.loginText {
+  margin-top: 15px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.error {
+  color: rgb(230, 57, 70);
+  background: rgb(255, 229, 229);
+  padding: 8px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.success {
+  color: rgb(42, 157, 143);
+  background: rgb(230, 255, 247);
+  padding: 8px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+  text-align: center;
 }

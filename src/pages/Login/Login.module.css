@@ -1,0 +1,89 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgb(0, 123, 255), rgb(30, 206, 255));
+  font-family: "Inter", sans-serif;
+}
+
+.card {
+  background: rgb(222, 246, 248);
+  padding: 40px;
+  width: 100%;
+  max-width: 350px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  border-radius: 10px;
+}
+
+.card h2 {
+  margin-bottom: 5px;
+}
+
+.card p {
+  color: rgb(102, 102, 102);
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+}
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.loginForm input {
+  padding: 10px;
+  border: 1px solid rgb(221, 221, 221);
+
+  border-radius: 5px;
+  font-size: 0.9rem;
+  outline: none;
+  transition: 0.2s;
+}
+
+.loginForm input:focus {
+  border-color: rgb(0, 123, 255);
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+}
+
+.loginForm button {
+  margin-top: 10px;
+  padding: 10px;
+  border: none;
+  background: rgb(0, 123, 255);
+  color: white;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.loginSubmitBtn:hover {
+  background: rgb(0, 86, 210);
+}
+
+.error {
+  color: rgb(230, 57, 70);
+  background: rgb(255, 229, 229);
+  padding: 8px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+}
+
+.success {
+  color: rgb(42, 157, 143);
+  background: rgb(230, 255, 247);
+  padding: 8px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .card {
+    padding: 30px 20px;
+  }
+}
