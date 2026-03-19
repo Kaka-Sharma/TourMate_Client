@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import axios from "axios";
 import styles from "./Profile.module.css";
 import { useNavigate } from "react-router-dom";
 import { FaCamera, FaUser } from "react-icons/fa";
+import { getProfile, removeAvatar, updateAvatar } from "../../api/api";
 
 const Profile = () => {
   const [user, setUser] = useState(null);
@@ -10,21 +10,23 @@ const Profile = () => {
   const [preview, setPreview] = useState(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
-  const [uploading, setUploading] = useState(false);
+  const [uploading, setUploading] = useState(false); // spinner
   const [menuOpen, setMenuOpen] = useState(false); // dropdown menu toggle
   const fileInputRef = useRef(null);
   const navigate = useNavigate();
-
+  useEffect(() => {
+    return () => {
+      if (preview) URL.revokeObjectURL(preview);
+    };
+  }, [preview]);
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/users/profile", {
-          withCredentials: true,
-        });
-        setUser(res.data.data);
+        const res = await getProfile();
+        setUser(res);
       } catch (error) {
         console.error(error);
-        setError("Failed to fetch profile. Please login.");
+        setError(error.message || "Failed to fetch profile. Please login.");
         navigate("/login");
       } finally {
         setLoading(false);
@@ -48,20 +50,13 @@ const Profile = () => {
     if (!file) return;
     setUploading(true);
     try {
-      const formData = new FormData();
-      formData.append("avatar", file);
-
-      const res = await axios.put(
-        "http://localhost:5000/api/users/profile",
-        formData,
-        { withCredentials: true },
-      );
-      setUser(res.data.data);
+      const res = await updateAvatar(file);
+      setUser(res);
       setPreview(null);
       setFile(null);
     } catch (error) {
       console.error(error);
-      setError("Failed to upload profile picture");
+      setError(error.message || "Failed to upload profile picture");
     } finally {
       setUploading(false);
     }
@@ -70,19 +65,26 @@ const Profile = () => {
   // remove profile picture
   const removeProfilePhoto = async () => {
     try {
-      const res = await axios.delete(
-        "http://localhost:5000/api/users/profile/avatar",
-        { withCredentials: true },
-      );
-      setUser(res.data.data);
+      const res = await removeAvatar();
+      setUser(res);
       setPreview(null);
       setMenuOpen(false);
     } catch (error) {
       console.error(error);
-      setError("Failed to remove profile picture");
+      setError(error.message || "Failed to remove profile picture");
     }
   };
 
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (!e.target.closest(`.${styles.avatarWrapper}`)) {
+        setMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, []);
   if (loading) return <p className={styles.loading}>Loading...</p>;
   if (error) return <p className={styles.error}>{error}</p>;
 
@@ -151,7 +153,7 @@ const Profile = () => {
             onClick={updateProfile}
             disabled={uploading}
           >
-           {uploading?"uploading..." : "Save New Avatar"}
+            {uploading ? "uploading..." : "Save New Avatar"}
           </button>
         )}
 

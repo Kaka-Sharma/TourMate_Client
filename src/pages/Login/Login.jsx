@@ -1,42 +1,27 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import styles from "./Login.module.css";
-import axios from "axios";
+import { loginUser } from "../../api/api";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setError("");
-    setMessage("");
     try {
-      const res = await axios.post(
-        "http://localhost:5000/api/auth/login",
-        {
-          email,
-          password,
-        },
-        {
-          withCredentials: true,
-        },
-      );
+      const res = await loginUser(email, password);
 
-      setMessage(res.data?.message || "Login Successful");
+      toast.success(res?.message || "Login Successful");
       setEmail("");
       setPassword("");
-      setTimeout(() => {
-        navigate("/");
-        window.location.reload();
-      }, 1000);
+      navigate("/");
     } catch (error) {
       console.log(error);
-      setError(error.response?.data?.message || "Login Failed");
+      toast.error(error.message || "Login Failed");
     }
   };
   return (
@@ -45,24 +30,28 @@ const Login = () => {
         <h2>Login</h2>
         <p>To explore TourMate</p>
 
-        {error && <p className={styles.error}>{error}</p>}
-        {message && <p className={styles.success}>{message}</p>}
-        <form onSubmit={handleSubmit} className={styles.loginForm}>
+        <form onSubmit={handleSubmit} className={styles.loginForm} autoComplete="off">
           <input
             type="email"
+            name="random_email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email Address"
             required
+            autoComplete="off"
           />
           <input
             type="password"
+            name="random_password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
+            autoComplete="new-password"
             required
           />
-          <button className={styles.loginSubmitBtn} type="submit">Submit</button>
+          <button className={styles.loginSubmitBtn} type="submit">
+            Submit
+          </button>
         </form>
       </div>
     </div>

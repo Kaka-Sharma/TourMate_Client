@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Navbar.module.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FiSearch } from "react-icons/fi";
 import axios from "axios";
 
 const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation()
 
   //  Check login when navbar loads
   useEffect(() => {
@@ -21,7 +22,7 @@ const Navbar = () => {
       }
     };
     checkLogin();
-  }, []);
+  }, [location]);
   const handleRegister = () => {
     navigate("/register");
   };

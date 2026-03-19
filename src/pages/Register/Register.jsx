@@ -1,43 +1,34 @@
 import React, { useState } from "react";
 import styles from "./Register.module.css";
-import axios from "axios";
+import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
+import { registerUser } from "../../api/api";
 
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [message, setMessage] = useState("");
-  const [error, setError] = useState("");
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setMessage("");
-    setError("");
     if (password !== confirmPassword) {
-      setError("Passwords do not match");
+      toast.error("Passwords do not match");
       return;
     }
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/register", {
-        name,
-        email,
-        password,
-        confirmPassword,
-      });
-      setMessage(res.data?.message || "Account created successfully");
+      const res = await registerUser(name, email, password, confirmPassword)
+      toast.success(res?.message || "Account created successfully");
       setName("");
       setEmail("");
       setPassword("");
       setConfirmPassword("");
-      setTimeout(() => {
-        navigate("/login");
-      }, 1500);
+
+      navigate("/login");
     } catch (error) {
       console.error(error);
-      setError(error.response?.data?.message || "Registration failed");
+      toast.error(error.message || "Registration failed");
     }
   };
   return (
@@ -45,8 +36,7 @@ const Register = () => {
       <div className={styles.card}>
         <h2>Create Account</h2>
         <p>Join TourMate and explore the world!</p>
-        {error && <p className={styles.error}>{error}</p>}
-        {message && <p className={styles.success}>{message}</p>}
+
         <form onSubmit={handleSubmit}>
           <input
             type="text"

@@ -1,0 +1,15 @@
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 30px, 20px;
+  background-color: rgb(249, 250, 255);
+  min-height: 80vh;
+}
+
+.container p {
+  grid-column: 1/-1;
+  text-align: center;
+  font-size: 1.2rem;
+  color: rgb(85, 85, 85);
+}
