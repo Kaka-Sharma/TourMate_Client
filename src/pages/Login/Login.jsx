@@ -3,22 +3,28 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import styles from "./Login.module.css";
 import { loginUser } from "../../api/api";
+import { useAuth } from "../../context/AuthContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       const res = await loginUser(email, password);
-
+      login(res.data);
       toast.success(res?.message || "Login Successful");
       setEmail("");
       setPassword("");
-      navigate("/");
+      if (res.data?.role === "admin") {
+        navigate("/admin/dashboard");
+      } else {
+        navigate("/");
+      }
     } catch (error) {
       console.log(error);
       toast.error(error.message || "Login Failed");
@@ -30,7 +36,11 @@ const Login = () => {
         <h2>Login</h2>
         <p>To explore TourMate</p>
 
-        <form onSubmit={handleSubmit} className={styles.loginForm} autoComplete="off">
+        <form
+          onSubmit={handleSubmit}
+          className={styles.loginForm}
+          autoComplete="off"
+        >
           <input
             type="email"
             name="random_email"

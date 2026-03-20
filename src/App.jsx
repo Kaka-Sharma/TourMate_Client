@@ -6,6 +6,8 @@ import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
 import Profile from "./pages/Profile/Profile";
 import Tours from "./pages/Tours/Tours";
+import Footer from "./components/Footer/Footer";
+import DashboardHome from "./pages/Dashboard/DashboardHome/DashboardHome";
 
 const App = () => {
   return (
@@ -17,7 +19,9 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/tours" element={<Tours />} />
+        <Route path="/admin/dashboard" element={<DashboardHome/>}/>
       </Routes>
+      <Footer/>
     </div>
   );
 };

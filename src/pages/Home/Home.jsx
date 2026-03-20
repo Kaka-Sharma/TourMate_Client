@@ -1,24 +1,24 @@
 import React from "react";
 import styles from "./Home.module.css";
+import { FiSearch } from "react-icons/fi";
 
 const Home = () => {
   return (
     <div className={styles.home}>
-
-      {/* Hero Section */}
       <section className={styles.hero}>
         <div className={styles.heroContent}>
           <h1>Explore the World with TourMate</h1>
           <p>Discover amazing destinations and book unforgettable tours.</p>
 
           <div className={styles.heroSearch}>
+            <button className={styles.heroSearchBtn}>
+              <FiSearch className={styles.heroSearchBtn} />
+            </button>
             <input type="text" placeholder="Search destinations..." />
-            <button>Search</button>
           </div>
         </div>
       </section>
 
-      {/* Popular Tours */}
       <section className={styles.popular}>
         <h2>Popular Tours</h2>
 
@@ -43,7 +43,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Why Choose Us */}
       <section className={styles.features}>
         <h2>Why Choose TourMate</h2>
 
@@ -64,7 +63,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-
     </div>
   );
 };

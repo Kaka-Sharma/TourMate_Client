@@ -11,6 +11,7 @@ const Profile = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false); // spinner
+  const [removing, setRemoving] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false); // dropdown menu toggle
   const fileInputRef = useRef(null);
   const navigate = useNavigate();
@@ -64,6 +65,7 @@ const Profile = () => {
 
   // remove profile picture
   const removeProfilePhoto = async () => {
+    setRemoving(true);
     try {
       const res = await removeAvatar();
       setUser(res);
@@ -72,6 +74,8 @@ const Profile = () => {
     } catch (error) {
       console.error(error);
       setError(error.message || "Failed to remove profile picture");
+    } finally {
+      setRemoving(false);
     }
   };
 
@@ -119,7 +123,7 @@ const Profile = () => {
             </div>
           )}
 
-          {uploading && (
+          {(uploading || removing) && (
             <div className={styles.avatarOverlay}>
               <div className={styles.spinner}></div>
             </div>
@@ -133,13 +137,16 @@ const Profile = () => {
             <div className={styles.avatarMenu}>
               <div
                 className={styles.menuItem}
-                onClick={() => fileInputRef.current.click()}
+                onClick={() => !removing && fileInputRef.current.click()}
               >
                 Change Profile Picture
               </div>
               {user.avatar && (
-                <div className={styles.menuItem} onClick={removeProfilePhoto}>
-                  Remove Profile Picture
+                <div
+                  className={styles.menuItem}
+                  onClick={!removing ? removeProfilePhoto : undefined}
+                >
+                  {removing ? "Removing..." : "Remove Profile Picture"}
                 </div>
               )}
             </div>
