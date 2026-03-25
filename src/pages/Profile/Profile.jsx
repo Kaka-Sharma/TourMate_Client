@@ -36,7 +36,6 @@ const Profile = () => {
     fetchProfile();
   }, [navigate]);
 
-  // file selection
   const handleFileChange = (e) => {
     const selected = e.target.files[0];
     if (selected) {
@@ -46,7 +45,6 @@ const Profile = () => {
     }
   };
 
-  // update profile picture
   const updateProfile = async () => {
     if (!file) return;
     setUploading(true);
@@ -63,7 +61,6 @@ const Profile = () => {
     }
   };
 
-  // remove profile picture
   const removeProfilePhoto = async () => {
     setRemoving(true);
     try {
@@ -97,7 +94,6 @@ const Profile = () => {
       <h2>Hello, {user?.name}</h2>
 
       <div className={styles.profileCard}>
-        {/* Hidden file input */}
         <input
           type="file"
           accept="image/*"
@@ -106,7 +102,6 @@ const Profile = () => {
           onChange={handleFileChange}
         />
 
-        {/* Avatar */}
         <div
           className={styles.avatarWrapper}
           onClick={() => setMenuOpen((prev) => !prev)}
@@ -132,7 +127,6 @@ const Profile = () => {
             <FaCamera />
           </div>
 
-          {/* Dropdown Menu */}
           {menuOpen && (
             <div className={styles.avatarMenu}>
               <div
@@ -153,7 +147,6 @@ const Profile = () => {
           )}
         </div>
 
-        {/* Save Button */}
         {preview && (
           <button
             className={styles.updateBtn}

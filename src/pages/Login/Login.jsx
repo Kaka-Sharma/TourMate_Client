@@ -21,7 +21,7 @@ const Login = () => {
       setEmail("");
       setPassword("");
       if (res.data?.role === "admin") {
-        navigate("/admin/dashboard");
+        navigate("/admin");
       } else {
         navigate("/");
       }
