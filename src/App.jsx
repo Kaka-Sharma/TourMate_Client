@@ -9,6 +9,7 @@ import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
 import Profile from "./pages/Profile/Profile";
 import Tours from "./pages/Tours/Tours";
+import TourDetails from "./pages/TourDetails/TourDetails";
 
 import DashboardLayout from "./pages/Dashboard/DashboardLayout/DashboardLayout";
 import ManageTours from "./pages/Dashboard/ManageTours/ManageTours";
@@ -50,6 +51,7 @@ const App = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/tours" element={<Tours />} />
+          <Route path="/tour/:id" element={<TourDetails />} />
           <Route
             path="/profile"
             element={

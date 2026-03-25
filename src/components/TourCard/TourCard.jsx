@@ -1,9 +1,16 @@
 import React from "react";
 import styles from "./TourCard.module.css";
+import { useNavigate } from "react-router-dom";
+import { FaClock, FaLocationArrow} from "react-icons/fa";
 
 const TourCard = ({ tour }) => {
+  const navigate = useNavigate()
+
+  const handleClick=()=>{
+    navigate(`/tour/${tour._id}`)
+  }
   return (
-    <div className={styles.card}>
+    <div className={styles.card} onClick={handleClick}>
       
       {/* Image */}
       <div className={styles.imageWrapper}>
@@ -22,7 +29,7 @@ const TourCard = ({ tour }) => {
       <div className={styles.info}>
         <h3 className={styles.title}>{tour?.title || "Untitled Tour"}</h3>
 
-        <p className={styles.location}>📍 {tour?.location || "Unknown"}</p>
+        <p className={styles.location}><FaLocationArrow/> {tour?.location || "Unknown"}</p>
 
         <p className={styles.description}>
           {tour?.description
@@ -33,9 +40,8 @@ const TourCard = ({ tour }) => {
         </p>
 
         <div className={styles.details}>
-          <span>⏱ {tour?.duration || 0} days</span>
-          <span>💰 &#8377;{tour?.price || 0}</span>
-          <span>⭐ {tour?.ratingAverage || "4.5"}</span>
+          <span><FaClock/> {tour?.duration || 0} days</span>
+          <span>₹{tour?.price || 0}</span>
         </div>
       </div>
 

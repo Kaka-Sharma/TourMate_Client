@@ -1,0 +1,44 @@
+.container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.popular {
+  color: #e74c3c;
+  margin-left: 10px;
+  font-size: 1.2rem;
+}
+
+.slider img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.info {
+  margin: 1.5rem 0;
+}
+
+.info p {
+  margin: 0.5rem 0;
+}
+
+.bookBtn {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: 0.3s;
+}
+
+.bookBtn:hover {
+  background-color: #2980b9;
+}
