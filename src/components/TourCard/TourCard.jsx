@@ -1,16 +1,17 @@
 import React from "react";
 import styles from "./TourCard.module.css";
 import { useNavigate } from "react-router-dom";
-import { FaClock, FaLocationArrow} from "react-icons/fa";
+import { FaClock, FaLocationArrow } from "react-icons/fa";
 
 const TourCard = ({ tour }) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const handleClick=()=>{
-    navigate(`/tour/${tour._id}`)
-  }
+  const handleViewDetails = () => {
+    navigate(`/tour/${tour._id}`);
+  };
+
   return (
-    <div className={styles.card} onClick={handleClick}>
+    <div className={styles.card}>
       
       {/* Image */}
       <div className={styles.imageWrapper}>
@@ -29,7 +30,9 @@ const TourCard = ({ tour }) => {
       <div className={styles.info}>
         <h3 className={styles.title}>{tour?.title || "Untitled Tour"}</h3>
 
-        <p className={styles.location}><FaLocationArrow/> {tour?.location || "Unknown"}</p>
+        <p className={styles.location}>
+          <FaLocationArrow /> {tour?.location || "Unknown"}
+        </p>
 
         <p className={styles.description}>
           {tour?.description
@@ -40,9 +43,14 @@ const TourCard = ({ tour }) => {
         </p>
 
         <div className={styles.details}>
-          <span><FaClock/> {tour?.duration || 0} days</span>
+          <span><FaClock /> {tour?.duration || 0} days</span>
           <span>₹{tour?.price || 0}</span>
         </div>
+
+        {/* View Details Button */}
+        <button className={styles.viewBtn} onClick={handleViewDetails}>
+          View Details
+        </button>
       </div>
 
     </div>
