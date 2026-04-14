@@ -2,60 +2,97 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "./Profile.module.css";
 import { useNavigate } from "react-router-dom";
 import { FaCamera, FaUser } from "react-icons/fa";
-import { getProfile, removeAvatar, updateAvatar } from "../../api/api";
+import {
+  getProfile,
+  removeAvatar,
+  updateAvatar,
+  getMyBookings,
+  deleteBooking,
+} from "../../api/api";
+import { toast } from "react-toastify";
+import ConfirmModal from "../../components/ConfirmModal/ConfirmModal";
 
 const Profile = () => {
   const [user, setUser] = useState(null);
+  const [bookings, setBookings] = useState([]);
+
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState(null);
-  const [error, setError] = useState("");
+
   const [loading, setLoading] = useState(true);
-  const [uploading, setUploading] = useState(false); // spinner
+  const [uploading, setUploading] = useState(false);
   const [removing, setRemoving] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false); // dropdown menu toggle
+
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const [showModal, setShowModal] = useState(false);
+  const [selectedBooking, setSelectedBooking] = useState(null);
+
   const fileInputRef = useRef(null);
+  const wrapperRef = useRef(null);
   const navigate = useNavigate();
+
   useEffect(() => {
     return () => {
       if (preview) URL.revokeObjectURL(preview);
     };
   }, [preview]);
+
   useEffect(() => {
-    const fetchProfile = async () => {
+    const fetchData = async () => {
       try {
-        const res = await getProfile();
-        setUser(res);
+        const userData = await getProfile();
+        setUser(userData);
+
+        if (userData.role === "user") {
+          const bookingData = await getMyBookings();
+          setBookings(bookingData);
+        }
       } catch (error) {
-        console.error(error);
-        setError(error.message || "Failed to fetch profile. Please login.");
+        toast.error(error.message || "Failed to load profile");
         navigate("/login");
       } finally {
         setLoading(false);
       }
     };
-    fetchProfile();
+
+    fetchData();
   }, [navigate]);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
+        setMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const handleFileChange = (e) => {
     const selected = e.target.files[0];
     if (selected) {
       setFile(selected);
       setPreview(URL.createObjectURL(selected));
-      setMenuOpen(false); // close menu after selection
+      setMenuOpen(false);
     }
   };
 
   const updateProfile = async () => {
     if (!file) return;
     setUploading(true);
+
     try {
       const res = await updateAvatar(file);
       setUser(res);
       setPreview(null);
       setFile(null);
+      toast.success("Profile updated");
     } catch (error) {
-      console.error(error);
-      setError(error.message || "Failed to upload profile picture");
+      toast.error(error.message || "Upload failed");
     } finally {
       setUploading(false);
     }
@@ -63,35 +100,40 @@ const Profile = () => {
 
   const removeProfilePhoto = async () => {
     setRemoving(true);
+
     try {
       const res = await removeAvatar();
       setUser(res);
-      setPreview(null);
-      setMenuOpen(false);
+      toast.success("Profile photo removed");
     } catch (error) {
-      console.error(error);
-      setError(error.message || "Failed to remove profile picture");
+      toast.error(error.message || "Remove failed");
     } finally {
       setRemoving(false);
     }
   };
 
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (!e.target.closest(`.${styles.avatarWrapper}`)) {
-        setMenuOpen(false);
-      }
-    };
+  const handleDeleteBooking = (id) => {
+    setSelectedBooking(id);
+    setShowModal(true);
+  };
+  const confirmDelete = async () => {
+    try {
+      await deleteBooking(selectedBooking);
+      setBookings((prev) => prev.filter((b) => b._id !== selectedBooking));
+      toast.success("Booking cancelled");
+    } catch (error) {
+      toast.error(error.message || "Delete failed");
+    } finally {
+      setShowModal(false);
+      setSelectedBooking(null);
+    }
+  };
 
-    document.addEventListener("click", handleClickOutside);
-    return () => document.removeEventListener("click", handleClickOutside);
-  }, []);
   if (loading) return <p className={styles.loading}>Loading...</p>;
-  if (error) return <p className={styles.error}>{error}</p>;
 
   return (
-    <div className={styles.profileContainer}>
-      <h2>Hello, {user?.name}</h2>
+    <div className={styles.container}>
+      <h2 className={styles.welcome}>Hello, {user?.name}</h2>
 
       <div className={styles.profileCard}>
         <input
@@ -103,8 +145,12 @@ const Profile = () => {
         />
 
         <div
+          ref={wrapperRef}
           className={styles.avatarWrapper}
-          onClick={() => setMenuOpen((prev) => !prev)}
+          onClick={(e) => {
+            e.stopPropagation();
+            setMenuOpen((prev) => !prev);
+          }}
         >
           {user.avatar || preview ? (
             <img
@@ -123,6 +169,7 @@ const Profile = () => {
               <div className={styles.spinner}></div>
             </div>
           )}
+
           <div className={styles.editIcon}>
             <FaCamera />
           </div>
@@ -131,16 +178,14 @@ const Profile = () => {
             <div className={styles.avatarMenu}>
               <div
                 className={styles.menuItem}
-                onClick={() => !removing && fileInputRef.current.click()}
+                onClick={() => fileInputRef.current.click()}
               >
-                Change Profile Picture
+                Change Photo
               </div>
+
               {user.avatar && (
-                <div
-                  className={styles.menuItem}
-                  onClick={!removing ? removeProfilePhoto : undefined}
-                >
-                  {removing ? "Removing..." : "Remove Profile Picture"}
+                <div className={styles.menuItem} onClick={removeProfilePhoto}>
+                  {removing ? "Removing..." : "Remove Photo"}
                 </div>
               )}
             </div>
@@ -153,21 +198,54 @@ const Profile = () => {
             onClick={updateProfile}
             disabled={uploading}
           >
-            {uploading ? "uploading..." : "Save New Avatar"}
+            {uploading ? "Uploading..." : "Save Avatar"}
           </button>
         )}
 
         <p>
-          <strong>Name</strong> <span>{user.name}</span>
+          <strong>Name:</strong> {user.name}
         </p>
         <p>
-          <strong>Email</strong> <span>{user.email}</span>
+          <strong>Email:</strong> {user.email}
         </p>
-        <p>
-          <strong>Role</strong>{" "}
-          <span className={styles.roleBadge}>{user.role}</span>
-        </p>
+
+        {user?.role === "admin" && <span className={styles.role}>Admin</span>}
       </div>
+
+      {user?.role === "user" && (
+        <div className={styles.bookingSection}>
+          <h3>My Bookings</h3>
+
+          {bookings.length === 0 ? (
+            <p>No bookings yet</p>
+          ) : (
+            <div className={styles.bookingGrid}>
+              {bookings.map((booking) => (
+                <div key={booking._id} className={styles.bookingCard}>
+                  <h4>{booking.tour?.title}</h4>
+                  <p>Guests: {booking.guests}</p>
+                  <p>Total: ₹{booking.totalPrice}</p>
+                  <p>Status: {booking.status}</p>
+
+                  <button
+                    className={styles.cancelBtn}
+                    onClick={() => handleDeleteBooking(booking._id)}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+      {showModal && (
+        <ConfirmModal
+          message="Are you sure you want to cancel this booking?"
+          onConfirm={confirmDelete}
+          onCancel={() => setShowModal(false)}
+        />
+      )}
     </div>
   );
 };

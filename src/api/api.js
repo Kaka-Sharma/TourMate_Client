@@ -79,7 +79,7 @@ const removeAvatar = async () => {
 // get tours
 const getTours = async (params = {}) => {
   try {
-    const res = await api.get("/tour", {params});
+    const res = await api.get("/tour", { params });
     return res.data.data;
   } catch (error) {
     throw handleError(error, "Failed to fetch tours");
@@ -110,6 +110,9 @@ const getPopularTours = async () => {
 const createTour = async (formData) => {
   try {
     const res = await api.post("/tour", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
     });
     return res.data.data;
   } catch (error) {
@@ -131,6 +134,9 @@ const toggleTour = async (id) => {
 const updateTour = async (id, formData) => {
   try {
     const res = await api.put(`/tour/${id}`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
     });
     return res.data.data;
   } catch (error) {
@@ -145,6 +151,69 @@ const deleteTour = async (id) => {
     return res.data.data;
   } catch (error) {
     throw handleError(error, "Failed to delete tour");
+  }
+};
+
+// create booking
+const createBooking = async (tourId, bookingData) => {
+  try {
+    const res = await api.post("/booking", {
+      tour: tourId,
+      ...bookingData,
+    });
+    return res.data.data;
+  } catch (error) {
+    throw handleError(error, "Failed to create booking");
+  }
+};
+
+// get all bookings (admin)
+const getBookings = async () => {
+  try {
+    const res = await api.get("/booking");
+    return res.data.data;
+  } catch (error) {
+    throw handleError(error, "Failed to fetch bookings");
+  }
+};
+
+// get single booking
+const getBooking = async (id) => {
+  try {
+    const res = await api.get(`/booking/${id}`);
+    return res.data.data;
+  } catch (error) {
+    throw handleError(error, "Failed to fetch booking");
+  }
+};
+
+// get my booking (logged-in user)
+const getMyBookings = async () => {
+  try {
+    const res = await api.get("/booking/my");
+    return res.data.data;
+  } catch (error) {
+    throw handleError(error, "Failed to fetch my bookings");
+  }
+};
+
+// update booking
+const updateBooking = async (id, data) => {
+  try {
+    const res = await api.put(`/booking/${id}`, data);
+    return res.data.data;
+  } catch (error) {
+    throw handleError(error, "Failed to update booking");
+  }
+};
+
+// delete booking
+const deleteBooking = async (id) => {
+  try {
+    const res = await api.delete(`/booking/${id}`);
+    return res.data.data;
+  } catch (error) {
+    throw handleError(error, "Failed to delete booking");
   }
 };
 
@@ -163,4 +232,10 @@ export {
   getPopularTours,
   toggleTour,
   deleteTour,
+  createBooking,
+  getBookings,
+  getBooking,
+  getMyBookings,
+  updateBooking,
+  deleteBooking,
 };

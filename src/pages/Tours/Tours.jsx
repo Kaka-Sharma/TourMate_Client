@@ -12,7 +12,6 @@ const Tours = () => {
       try {
         const res = await getTours();
 
-        // safer handling
         if (Array.isArray(res)) {
           setTours(res);
         } else {
@@ -33,7 +32,6 @@ const Tours = () => {
     <div className={styles.wrapper}>
       <h2 className={styles.heading}><FaMapMarkedAlt className={styles.map}/>Explore Tours</h2>
 
-      {/* Loading */}
       {loading ? (
         <div className={styles.loader}></div>
       ) : tours.length > 0 ? (

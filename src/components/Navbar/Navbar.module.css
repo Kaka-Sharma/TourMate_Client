@@ -94,7 +94,7 @@ header {
   border: 1px solid rgb(0, 123, 255);
 }
 
-.tour {
+/* .tour {
   color: rgb(0, 123, 255);
   transition: color 0.3s ease;
 }
@@ -108,11 +108,23 @@ header {
 }
 .mate:hover {
   color: rgb(0, 123, 255);
+} */
+
+.logo img {
+  height: 45px;        /* control logo size */
+  width: auto;
+  object-fit: contain;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+  transform: scale(1.05); /* subtle hover effect */
 }
 
 .mainHeader {
   background-color: rgb(255, 255, 255);
-  padding: 15px 10%;
+  padding: 15px 5%;
   display: flex;
   align-items: center;
   justify-content: space-between;

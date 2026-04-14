@@ -10,6 +10,8 @@ import Login from "./pages/Login/Login";
 import Profile from "./pages/Profile/Profile";
 import Tours from "./pages/Tours/Tours";
 import TourDetails from "./pages/TourDetails/TourDetails";
+import Booking from "./pages/Booking/Booking";
+import Spinner from "./components/Spinner/Spinner";
 
 import DashboardLayout from "./pages/Dashboard/DashboardLayout/DashboardLayout";
 import ManageTours from "./pages/Dashboard/ManageTours/ManageTours";
@@ -23,7 +25,7 @@ import { useAuth } from "./context/AuthContext";
 const ProtectedRoute = ({ children, adminOnly = false }) => {
   const { user, loading } = useAuth();
 
-  if (loading) return null; // or spinner
+  if (loading) return <Spinner />;
 
   if (!user) return <Navigate to="/login" />;
 
@@ -52,6 +54,7 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/tours" element={<Tours />} />
           <Route path="/tour/:id" element={<TourDetails />} />
+          <Route path="/booking/:id" element={<Booking />} />
           <Route
             path="/profile"
             element={

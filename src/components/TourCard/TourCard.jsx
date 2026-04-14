@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./TourCard.module.css";
 import { useNavigate } from "react-router-dom";
-import { FaClock, FaLocationArrow } from "react-icons/fa";
+import { FaClock, FaLocationArrow, FaRupeeSign } from "react-icons/fa";
 
 const TourCard = ({ tour }) => {
   const navigate = useNavigate();
@@ -12,7 +12,6 @@ const TourCard = ({ tour }) => {
 
   return (
     <div className={styles.card}>
-      
       {/* Image */}
       <div className={styles.imageWrapper}>
         {tour?.images?.length > 0 ? (
@@ -43,16 +42,19 @@ const TourCard = ({ tour }) => {
         </p>
 
         <div className={styles.details}>
-          <span><FaClock /> {tour?.duration || 0} days</span>
-          <span>₹{tour?.price || 0}</span>
+          <span>
+            <FaClock /> {tour?.duration || 0} days
+          </span>
+          <span>
+            <FaRupeeSign className={styles.rupee} />
+            {tour?.price || 0}
+          </span>
         </div>
 
-        {/* View Details Button */}
         <button className={styles.viewBtn} onClick={handleViewDetails}>
           View Details
         </button>
       </div>
-
     </div>
   );
 };

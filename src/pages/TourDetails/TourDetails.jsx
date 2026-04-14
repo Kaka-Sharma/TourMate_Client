@@ -23,7 +23,7 @@ const TourDetails = () => {
         setTour(data);
       } catch (error) {
         toast.error(error.message || "Failed to fetch tour");
-        navigate("/"); // redirect if tour not found
+        navigate("/"); 
       } finally {
         setLoading(false);
       }
@@ -31,7 +31,7 @@ const TourDetails = () => {
     fetchTour();
   }, [id, navigate]);
 
-  if (loading || authLoading) return <Spinner />; // show spinner until data & auth ready
+  if (loading || authLoading) return <Spinner />; 
   if (!tour) return <p>Tour not found</p>;
 
   const handleBooking = () => {
@@ -58,7 +58,6 @@ const TourDetails = () => {
         {tour.title} {tour.isPopular && <span className={styles.popular}>🔥 Popular</span>}
       </h1>
 
-      {/* Image Carousel */}
       {tour.images && tour.images.length > 0 && (
         <Slider {...sliderSettings} className={styles.slider}>
           {tour.images.map((img) => (

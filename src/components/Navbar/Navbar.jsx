@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FiSearch } from "react-icons/fi";
 import { useAuth } from "../../context/AuthContext";
 import { logoutUser } from "../../api/api";
+import Logo from '../../assets/TourmateLogo.png'
 const Navbar = () => {
   const navigate = useNavigate();
   const { user, loading, logout } = useAuth();
@@ -53,14 +54,14 @@ const Navbar = () => {
       <div className={styles.mainHeader}>
         <div className={styles.logo}>
           <h2 className={styles.tour}>
-            Tour<span className={styles.mate}>Mate</span>
+            {/* Tour<span className={styles.mate}>Mate</span> */}
+            <img src={Logo} alt="Logo"/>
           </h2>
         </div>
 
         <nav className={styles.navLinks}>
           <Link to="/">Home</Link>
           <Link to="/tours">Tours</Link>
-          <Link to="/booking">Booking</Link>
         </nav>
 
         <div className={styles.searchBox}>
