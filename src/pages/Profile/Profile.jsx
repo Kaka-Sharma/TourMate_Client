@@ -1,13 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./Profile.module.css";
 import { useNavigate } from "react-router-dom";
-import { FaCamera, FaUser } from "react-icons/fa";
+import { FaCamera, FaRupeeSign, FaUser } from "react-icons/fa";
 import {
   getProfile,
   removeAvatar,
   updateAvatar,
   getMyBookings,
   deleteBooking,
+  updateBooking,
 } from "../../api/api";
 import { toast } from "react-toastify";
 import ConfirmModal from "../../components/ConfirmModal/ConfirmModal";
@@ -27,6 +28,9 @@ const Profile = () => {
 
   const [showModal, setShowModal] = useState(false);
   const [selectedBooking, setSelectedBooking] = useState(null);
+
+  const [editingBooking, setEditingBooking] = useState(null);
+  const [updatedGuests, setUpdatedGuests] = useState(1);
 
   const fileInputRef = useRef(null);
   const wrapperRef = useRef(null);
@@ -116,6 +120,7 @@ const Profile = () => {
     setSelectedBooking(id);
     setShowModal(true);
   };
+
   const confirmDelete = async () => {
     try {
       await deleteBooking(selectedBooking);
@@ -126,6 +131,32 @@ const Profile = () => {
     } finally {
       setShowModal(false);
       setSelectedBooking(null);
+    }
+  };
+
+  const handleEditBooking = (booking) => {
+    navigate(`/booking/${booking.tour._id}`, {
+      state: {
+        bookingId: booking._id,
+        guests: booking.guests,
+      },
+    });
+  };
+
+  const handleUpdateBooking = async () => {
+    try {
+      const updated = await updateBooking(editingBooking, {
+        guests: updatedGuests,
+      });
+
+      setBookings((prev) =>
+        prev.map((b) => (b._id === editingBooking ? { ...b, ...updated } : b)),
+      );
+
+      toast.success("Booking updated");
+      setEditingBooking(null);
+    } catch (error) {
+      toast.error(error.message || "Update failed");
     }
   };
 
@@ -223,22 +254,70 @@ const Profile = () => {
               {bookings.map((booking) => (
                 <div key={booking._id} className={styles.bookingCard}>
                   <h4>{booking.tour?.title}</h4>
-                  <p>Guests: {booking.guests}</p>
-                  <p>Total: ₹{booking.totalPrice}</p>
-                  <p>Status: {booking.status}</p>
 
-                  <button
-                    className={styles.cancelBtn}
-                    onClick={() => handleDeleteBooking(booking._id)}
-                  >
-                    Cancel
-                  </button>
+                  {editingBooking === booking._id ? (
+                    <input
+                      type="number"
+                      min="1"
+                      value={updatedGuests}
+                      onChange={(e) => setUpdatedGuests(e.target.value)}
+                    />
+                  ) : (
+                    <p>Guests: {booking.guests}</p>
+                  )}
+
+                  <p>
+                    Total: <FaRupeeSign className={styles.rupee}/> {booking.totalPrice}
+                  </p>
+
+                  <p className={styles[booking.status]}>
+                    Status: {booking.status}
+                  </p>
+
+                  {booking.status === "pending" && (
+                    <>
+                      {editingBooking === booking._id ? (
+                        <>
+                          <button
+                            className={styles.updateBtn}
+                            onClick={handleUpdateBooking}
+                          >
+                            Save
+                          </button>
+
+                          <button
+                            className={styles.cancelBtn}
+                            onClick={() => setEditingBooking(null)}
+                          >
+                            Cancel
+                          </button>
+                        </>
+                      ) : (
+                        <>
+                          <button
+                            className={styles.editBtn}
+                            onClick={() => handleEditBooking(booking)}
+                          >
+                            Edit
+                          </button>
+
+                          <button
+                            className={styles.cancelBtn}
+                            onClick={() => handleDeleteBooking(booking._id)}
+                          >
+                            Cancel
+                          </button>
+                        </>
+                      )}
+                    </>
+                  )}
                 </div>
               ))}
             </div>
           )}
         </div>
       )}
+
       {showModal && (
         <ConfirmModal
           message="Are you sure you want to cancel this booking?"

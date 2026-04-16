@@ -2,34 +2,32 @@
   background: linear-gradient(135deg, #1e1e2f, #2c2c54);
   color: rgb(255, 255, 255);
   margin-top: 50px;
+  
 }
 
 .container {
   display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  justify-content: space-around;
   padding: 50px 30px;
-  gap: 30px;
+  gap: 40px;
 }
 
-.section {
-  flex: 1;
-  min-width: 220px;
+.logoContainer{
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  width: 350px;
 }
 
 .logo {
-  font-size: 26px;
   font-weight: bold;
   margin-bottom: 10px;
   color: rgb(77, 166, 255);
 }
 
-.mate {
-  color: rgb(230, 222, 0);
-  transition: color 0.3s ease;
-}
-.mate:hover {
-  color: rgb(77, 166, 255);
+.logo img{
+  width: 150%;
+  margin-top: 5px;
 }
 
 .text {
@@ -81,6 +79,9 @@ footer .section h3::after {
 
 .icons p{
     padding: 4px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 .mapIcon {

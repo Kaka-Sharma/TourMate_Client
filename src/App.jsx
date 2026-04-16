@@ -12,6 +12,7 @@ import Tours from "./pages/Tours/Tours";
 import TourDetails from "./pages/TourDetails/TourDetails";
 import Booking from "./pages/Booking/Booking";
 import Spinner from "./components/Spinner/Spinner";
+import About from "./pages/About/About";
 
 import DashboardLayout from "./pages/Dashboard/DashboardLayout/DashboardLayout";
 import ManageTours from "./pages/Dashboard/ManageTours/ManageTours";
@@ -53,6 +54,7 @@ const App = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/tours" element={<Tours />} />
+          <Route path="/about" element={<About />} />
           <Route path="/tour/:id" element={<TourDetails />} />
           <Route path="/booking/:id" element={<Booking />} />
           <Route

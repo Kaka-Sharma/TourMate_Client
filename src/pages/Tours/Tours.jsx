@@ -3,14 +3,20 @@ import styles from "./Tours.module.css";
 import { getTours } from "../../api/api";
 import TourCard from "../../components/TourCard/TourCard";
 import {FaMapMarkedAlt} from 'react-icons/fa'
+import { useLocation } from "react-router-dom";
 const Tours = () => {
   const [tours, setTours] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const location = useLocation()
+
+  const query = new URLSearchParams(location.search)
+  const search = query.get('search')
+
   useEffect(() => {
     const fetchTours = async () => {
       try {
-        const res = await getTours();
+        const res = await getTours({search});
 
         if (Array.isArray(res)) {
           setTours(res);
@@ -26,7 +32,7 @@ const Tours = () => {
     };
 
     fetchTours();
-  }, []);
+  }, [search]);
 
   return (
     <div className={styles.wrapper}>

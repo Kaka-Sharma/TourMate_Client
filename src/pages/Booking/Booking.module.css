@@ -19,6 +19,13 @@
   color: transparent;
 }
 
+
+.rupee{
+  font-size: 13px;
+}
+.rupee1{
+  font-size: 11px;
+}
 .card {
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(14px);

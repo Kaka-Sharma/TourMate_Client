@@ -18,7 +18,7 @@
 }
 
 .rupee {
-  font-size: 10px;
+  font-size: 10.5px;
 }
 
 .image {
@@ -90,5 +90,5 @@
 
 .viewBtn:hover {
   background-color: rgb(11, 37, 164);
-  color: rgb(244, 250, 242);
+  color: rgb(250, 242, 242);
 }

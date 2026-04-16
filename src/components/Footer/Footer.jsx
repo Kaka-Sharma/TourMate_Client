@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./Footer.module.css";
+import Logo from "../../assets/TourmateLogo.png";
 import {
   FaFacebook,
   FaInstagram,
@@ -14,15 +15,16 @@ const Footer = () => {
     <footer className={styles.footer}>
       <div className={styles.container}>
         <div className={styles.section}>
-          <h2 className={styles.logo}>
-            Tour<span className={styles.mate}>Mate</span>
-          </h2>
-          <p className={styles.text}>
-            Discover unforgettable travel experiences with us. Plan your next
-            adventure easily and explore the world like never before.
-          </p>
+          <div className={styles.logoContainer}>
+            <h2 className={styles.logo}>
+              <img src={Logo} alt="Logo" />
+            </h2>
+            <p className={styles.text}>
+              Discover unforgettable travel experiences with us. Plan your next
+              adventure easily and explore the world like never before.
+            </p>
+          </div>
         </div>
-
         <div className={styles.section}>
           <h3>Quick Links</h3>
           <ul>
@@ -48,7 +50,7 @@ const Footer = () => {
               <FaEnvelope className={styles.emailIcon} /> support@tourmate.com
             </p>
             <p>
-              <FaPhone className={styles.phoneIcon} /> +91 ***** *****
+              <FaPhone className={styles.phoneIcon} /> +91 87986 *****
             </p>
           </div>
         </div>

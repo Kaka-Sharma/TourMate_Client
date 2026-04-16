@@ -12,7 +12,6 @@ const TourCard = ({ tour }) => {
 
   return (
     <div className={styles.card}>
-      {/* Image */}
       <div className={styles.imageWrapper}>
         {tour?.images?.length > 0 ? (
           <img
@@ -25,7 +24,6 @@ const TourCard = ({ tour }) => {
         )}
       </div>
 
-      {/* Info */}
       <div className={styles.info}>
         <h3 className={styles.title}>{tour?.title || "Untitled Tour"}</h3>
 

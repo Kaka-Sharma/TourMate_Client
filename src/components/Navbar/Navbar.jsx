@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Navbar.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { FiSearch } from "react-icons/fi";
 import { useAuth } from "../../context/AuthContext";
 import { logoutUser } from "../../api/api";
-import Logo from '../../assets/TourmateLogo.png'
+import Logo from "../../assets/TourmateLogo.png";
 const Navbar = () => {
   const navigate = useNavigate();
   const { user, loading, logout } = useAuth();
+  const [search, setSearch] = useState("");
 
   const isLoggedIn = !!user;
 
@@ -22,6 +23,17 @@ const Navbar = () => {
       navigate("/login");
     } catch (error) {
       console.error(error);
+    }
+  };
+
+  const handleSearch = () => {
+    if (!search.trim()) return;
+    navigate(`/tours?search=${search}`);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
     }
   };
 
@@ -54,21 +66,27 @@ const Navbar = () => {
       <div className={styles.mainHeader}>
         <div className={styles.logo}>
           <h2 className={styles.tour}>
-            {/* Tour<span className={styles.mate}>Mate</span> */}
-            <img src={Logo} alt="Logo"/>
+            <img src={Logo} alt="Logo" />
           </h2>
         </div>
 
         <nav className={styles.navLinks}>
           <Link to="/">Home</Link>
           <Link to="/tours">Tours</Link>
+          <Link to="about">About Us</Link>
         </nav>
 
         <div className={styles.searchBox}>
-          <button className={styles.searchBtn}>
+          <button className={styles.searchBtn} onClick={handleSearch}>
             <FiSearch className={styles.searchIcon} />
           </button>
-          <input type="text" placeholder="Search destinations..." />
+          <input
+            type="text"
+            placeholder="Search destinations..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            onKeyDown={handleKeyDown}
+          />
         </div>
       </div>
     </header>

@@ -11,6 +11,15 @@
   margin-bottom: 25px;
 }
 
+.iconContainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.rupee{
+  font-size: 22px;
+}
+
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));

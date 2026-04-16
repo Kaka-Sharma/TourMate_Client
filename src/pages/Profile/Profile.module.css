@@ -18,6 +18,10 @@
   -webkit-text-fill-color: transparent;
 }
 
+.rupee {
+  font-size: 11px;
+}
+
 .profileCard {
   background: rgba(255, 255, 255, 0.65);
   backdrop-filter: blur(12px);
@@ -155,14 +159,30 @@
 }
 
 .bookingSection {
-  margin-top: 40px;
+  margin-top: 50px;
+  padding: 30px 25px;
+
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(14px);
+
+  border-radius: 20px;
+
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+
+  transition: 0.3s;
+}
+
+.bookingSection:hover {
+  transform: translateY(-4px);
 }
 
 .bookingSection h3 {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
   font-size: 26px;
-  font-weight: 700;
+  font-weight: 800;
+
+  letter-spacing: 0.5px;
 
   background: linear-gradient(45deg, #6c63ff, #00c6ff);
   -webkit-background-clip: text;
@@ -170,10 +190,23 @@
   color: transparent;
 }
 
+.bookingSection h3::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  margin: 8px auto 0;
+
+  background: linear-gradient(45deg, #6c63ff, #00c6ff);
+  border-radius: 10px;
+}
+
 .bookingGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 25px;
+
+  margin-top: 20px;
 }
 
 .bookingCard {
@@ -205,7 +238,60 @@
 .bookingCard p {
   margin: 6px 0;
   font-size: 14px;
-  color: #4b5563;
+  color: rgb(58, 65, 75);
+}
+
+.rupee{
+  font-size: 11px;
+}
+
+.modalInput {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+
+  font-size: 14px;
+  outline: none;
+
+  transition: 0.3s;
+}
+
+.modalInput:focus {
+  border-color: #6c63ff;
+  box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.2);
+}
+
+.btnGroup {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.status {
+  margin-top: 6px;
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.pending {
+  background: rgb(252, 229, 201);
+  color: rgb(234, 88, 12);
+}
+
+.approved {
+  background: #ecfdf5;
+  color: #059669;
+}
+
+.rejected {
+  background: #fef2f2;
+  color: #dc2626;
 }
 
 .cancelBtn {
@@ -226,6 +312,30 @@
 .cancelBtn:hover {
   transform: scale(1.05);
   box-shadow: 0 5px 15px rgba(255, 0, 0, 0.4);
+}
+
+.editBtn {
+  margin-top: 10px;
+  padding: 8px 14px;
+  border: none;
+
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  color: white;
+
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  transition: 0.3s;
+}
+
+.editBtn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 114, 255, 0.4);
 }
 
 .loading,

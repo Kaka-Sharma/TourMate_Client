@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { createBooking, getTour } from "../../api/api";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { createBooking, getTour, updateBooking } from "../../api/api";
 import { toast } from "react-toastify";
 import Spinner from "../../components/Spinner/Spinner";
 import styles from "./Booking.module.css";
@@ -10,6 +10,10 @@ const Booking = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
+  const location = useLocation();
+  const editData = location.state;
+
+  const isEditMode = !!editData;
   const [tour, setTour] = useState(null);
   const [guests, setGuests] = useState(1);
   const [loading, setLoading] = useState(true);
@@ -31,8 +35,13 @@ const Booking = () => {
 
   const handleBooking = async () => {
     try {
-      await createBooking(id, { guests });
-      toast.success("Booking successful");
+      if (isEditMode) {
+        await updateBooking(editData.bookingId, { guests });
+        toast.success("Booking Updated");
+      } else {
+        await createBooking(id, { guests });
+        toast.success("Booking successful");
+      }
       navigate("/profile");
     } catch (error) {
       toast.error(error.message || "Booking failed");
@@ -44,11 +53,14 @@ const Booking = () => {
   }
   return (
     <div className={styles.container}>
-      <h2>Confirm Your Booking</h2>
+      <h2>{!isEditMode ? "Confirm Your Booking" : "Update Booking"}</h2>
 
       <div className={styles.card}>
         <h3>{tour?.title}</h3>
-        <p>Price per person: ₹{tour?.price}</p>
+        <p>
+          Price per person: <FaRupeeSign className={styles.rupee1} />
+          {tour?.price}
+        </p>
 
         <div className={styles.inputGroup}>
           <label>Number of Guests</label>
@@ -61,12 +73,12 @@ const Booking = () => {
         </div>
 
         <h4>
-          Total: <FaRupeeSign />
+          Total: <FaRupeeSign className={styles.rupee} />
           {tour?.price * guests}
         </h4>
 
         <button className={styles.bookBtn} onClick={handleBooking}>
-          Confirm Booking
+          {isEditMode ? "Update Booking" : "Confirm Booking"}
         </button>
       </div>
     </div>

@@ -8,6 +8,7 @@ import styles from "./TourDetails.module.css";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import { FaRupeeSign } from "react-icons/fa";
 
 const TourDetails = () => {
   const { id } = useParams();
@@ -69,7 +70,7 @@ const TourDetails = () => {
       <div className={styles.info}>
         <p><strong>Description:</strong> {tour.description}</p>
         <p><strong>Location:</strong> {tour.location}</p>
-        <p><strong>Price:</strong> ₹{tour.price}</p>
+        <p><strong>Price:</strong> <FaRupeeSign className={styles.rupee}/>{tour.price}</p>
         <p><strong>Duration:</strong> {tour.duration} days</p>
         <p><strong>Max Group Size:</strong> {tour.maxGroupSize}</p>
         <p><strong>Difficulty:</strong> {tour.difficulty}</p>

@@ -3,12 +3,15 @@ import { deleteTour, getTours, toggleTour } from "../../../api/api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import styles from "./ManageTours.module.css";
+import ConfirmModal from "../../../components/ConfirmModal/ConfirmModal"; // adjust path if needed
+
 import {
   FaRegArrowAltCircleRight,
   FaEdit,
   FaRegArrowAltCircleLeft,
   FaStar,
   FaTrash,
+  FaRupeeSign,
 } from "react-icons/fa";
 
 const ManageTours = () => {
@@ -17,12 +20,14 @@ const ManageTours = () => {
   const [view, setView] = useState("grid");
   const [currentIndex, setCurrentIndex] = useState({});
 
+  const [showModal, setShowModal] = useState(false);
+  const [selectedTourId, setSelectedTourId] = useState(null);
+
   const navigate = useNavigate();
 
-  // Fetch all tours
   const fetchTours = async () => {
     try {
-      const data = await getTours(); // use getTours, not getTour
+      const data = await getTours();
       setTours(data);
     } catch (error) {
       toast.error(error.message || "Failed to fetch tours");
@@ -35,25 +40,36 @@ const ManageTours = () => {
     fetchTours();
   }, []);
 
-  // Navigate to edit tour
   const handleEditTour = (id) => {
     navigate(`/admin/edit-tour/${id}`);
   };
 
-  // Delete tour
-  const handleDelete = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this tour?")) return;
+  const openDeleteModal = (id) => {
+    setSelectedTourId(id);
+    setShowModal(true);
+  };
 
+  const handleConfirmDelete = async () => {
     try {
-      await deleteTour(id);
+      await deleteTour(selectedTourId);
       toast.success("Tour deleted successfully");
-      setTours((prev) => prev.filter((tour) => tour._id !== id));
+
+      setTours((prev) =>
+        prev.filter((tour) => tour._id !== selectedTourId)
+      );
+
+      setShowModal(false);
+      setSelectedTourId(null);
     } catch (error) {
       toast.error(error.message || "Delete failed");
     }
   };
 
-  // Toggle popularity
+  const handleCancel = () => {
+    setShowModal(false);
+    setSelectedTourId(null);
+  };
+
   const handleToggle = async (id) => {
     try {
       const updatedTour = await toggleTour(id);
@@ -61,15 +77,14 @@ const ManageTours = () => {
         prev.map((tour) =>
           tour._id === id
             ? { ...tour, isPopular: updatedTour.isPopular }
-            : tour,
-        ),
+            : tour
+        )
       );
     } catch (error) {
       toast.error(error.message || "Failed to update popularity");
     }
   };
 
-  // handler to multiple images
   const handleNext = (id, length) => {
     setCurrentIndex((prev) => ({
       ...prev,
@@ -93,29 +108,26 @@ const ManageTours = () => {
     );
   }
 
-  const handleGrid = () => {
-    setView("grid");
-  };
-  const handleList = () => {
-    setView("list");
-  };
   return (
     <div className={styles.container}>
       <h2 className={styles.heading}>Manage Tours</h2>
+
       <div className={styles.topBar}>
         <button
-          className={`${view === "grid"} ${styles.gridBtn}`}
-          onClick={handleGrid}
+          className={`${view === "grid" ? styles.active : ""} ${styles.gridBtn}`}
+          onClick={() => setView("grid")}
         >
           Card
         </button>
+
         <button
-          className={`${styles.listBtn} ${view === "list"}`}
-          onClick={handleList}
+          className={`${view === "list" ? styles.active : ""} ${styles.listBtn}`}
+          onClick={() => setView("list")}
         >
           List
         </button>
       </div>
+
       {tours.length === 0 ? (
         <p>No tours available.</p>
       ) : (
@@ -136,23 +148,30 @@ const ManageTours = () => {
                   <>
                     <button
                       className={styles.prevBtn}
-                      onClick={() => handlePrev(tour._id, tour.images.length)}
+                      onClick={() =>
+                        handlePrev(tour._id, tour.images.length)
+                      }
                     >
-                      <FaRegArrowAltCircleLeft className={styles.arrow} />
+                      <FaRegArrowAltCircleLeft />
                     </button>
+
                     <button
                       className={styles.nextBtn}
-                      onClick={() => handleNext(tour._id, tour.images.length)}
+                      onClick={() =>
+                        handleNext(tour._id, tour.images.length)
+                      }
                     >
-                      <FaRegArrowAltCircleRight className={styles.arrow} />
+                      <FaRegArrowAltCircleRight />
                     </button>
                   </>
                 )}
               </div>
+
               <div className={styles.content}>
                 <h3 className={styles.title}>{tour.title}</h3>
                 <p className={styles.location}>{tour.location}</p>
-                <p className={styles.price}>&#8377;{tour.price}</p>
+                <p className={styles.price}><FaRupeeSign className={styles.rupee}/>{tour.price}</p>
+
                 <div className={styles.actions}>
                   <button
                     className={styles.editBtn}
@@ -160,24 +179,21 @@ const ManageTours = () => {
                   >
                     {view === "grid" ? <FaEdit /> : "Edit"}
                   </button>
+
                   <button
                     className={styles.deleteBtn}
-                    onClick={() => handleDelete(tour._id)}
+                    onClick={() => openDeleteModal(tour._id)}
                   >
                     {view === "grid" ? <FaTrash /> : "Delete"}
                   </button>
+
                   <button
-                    className={`${tour.isPopular ? styles.unmarkBtn : styles.markBtn} ${
-                      tour.isPopular ? styles.active : ""
-                    }`}
+                    className={`${
+                      tour.isPopular ? styles.unmarkBtn : styles.markBtn
+                    } ${tour.isPopular ? styles.active : ""}`}
                     onClick={() => handleToggle(tour._id)}
                   >
-                    {view === "grid" && tour.isPopular ? (
-                      <>
-                        Remove from Popular
-                        <FaStar className={styles.starIcon} />
-                      </>
-                    ) : tour.isPopular ? (
+                    {tour.isPopular ? (
                       <>
                         Remove from Popular <FaStar />
                       </>
@@ -192,6 +208,14 @@ const ManageTours = () => {
             </div>
           ))}
         </div>
+      )}
+
+      {showModal && (
+        <ConfirmModal
+          message="Are you sure you want to delete this tour?"
+          onConfirm={handleConfirmDelete}
+          onCancel={handleCancel}
+        />
       )}
     </div>
   );

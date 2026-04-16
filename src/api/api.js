@@ -197,6 +197,26 @@ const getMyBookings = async () => {
   }
 };
 
+// approve booking (admin)
+const approveBooking = async (id) => {
+  try {
+    const res = await api.put(`/booking/${id}/approve`);
+    return res.data.data;
+  } catch (error) {
+    throw handleError(error, "Failed to approve booking");
+  }
+};
+
+// reject booking (Admin)
+const rejectBooking = async (id) => {
+  try {
+    const res = await api.put(`booking/${id}/reject`);
+    return res.data.data;
+  } catch (error) {
+    throw handleError(error, "Failed to reject booking");
+  }
+};
+
 // update booking
 const updateBooking = async (id, data) => {
   try {
@@ -214,6 +234,58 @@ const deleteBooking = async (id) => {
     return res.data.data;
   } catch (error) {
     throw handleError(error, "Failed to delete booking");
+  }
+};
+
+// CRUD for admin
+
+// create user
+const createUser = async (userData) => {
+  try {
+    const res = await api.post("/users", userData);
+    return res.data.data;
+  } catch (error) {
+    throw handleError(error, "Failed to fetch users");
+  }
+};
+
+// get all users
+const getUsers = async () => {
+  try {
+    const res = await api.get("/users");
+    return res.data.data;
+  } catch (error) {
+    throw handleError(error, "Failed to fetch users");
+  }
+};
+
+// get single user
+const getUser = async (id) => {
+  try {
+    const res = await api.get(`/users/${id}`);
+    return res.data.data;
+  } catch (error) {
+    throw handleError(error, "Failed to fetch user");
+  }
+};
+
+// update user
+const updateUser = async (id, userData) => {
+  try {
+    const res = await api.put(`/users/${id}`, userData);
+    return res.data.data;
+  } catch (error) {
+    throw handleError(error, "Failed to update user");
+  }
+};
+
+// delete user
+const deleteUser = async (id) => {
+  try {
+    const res = await api.delete(`/users/${id}`);
+    return res.data;
+  } catch (error) {
+    throw handleError(error, "Failed to delete user");
   }
 };
 
@@ -236,6 +308,13 @@ export {
   getBookings,
   getBooking,
   getMyBookings,
+  approveBooking,
+  rejectBooking,
   updateBooking,
   deleteBooking,
+  createUser,
+  getUsers,
+  getUser,
+  updateUser,
+  deleteUser,
 };
