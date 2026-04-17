@@ -6,6 +6,7 @@ import {
   FaRupeeSign,
   FaUsers,
   FaPlaneDeparture,
+  FaPlaneArrival,
 } from "react-icons/fa";
 
 const About = () => {
@@ -70,7 +71,10 @@ const About = () => {
 
       <section className={styles.footerNote}>
         <h3>
-          Start your journey with TourMate today <FaPlaneDeparture />
+          Start your journey with TourMate today{" "}
+          <div className={styles.planeContainer}>
+            <FaPlaneDeparture className={styles.plane} />
+          </div>
         </h3>
       </section>
     </div>

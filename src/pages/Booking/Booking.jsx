@@ -17,7 +17,11 @@ const Booking = () => {
   const [tour, setTour] = useState(null);
   const [guests, setGuests] = useState(1);
   const [loading, setLoading] = useState(true);
-
+  useEffect(() => {
+    if (editData) {
+      setGuests(editData.guests);
+    }
+  }, [editData]);
   useEffect(() => {
     const fetchTour = async () => {
       try {

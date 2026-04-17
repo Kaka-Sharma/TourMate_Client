@@ -278,20 +278,25 @@
   font-size: 12px;
   font-weight: 600;
 }
+.buttons{
+  display: flex;
+  gap: 7px;
+}
 
 .pending {
   background: rgb(252, 229, 201);
-  color: rgb(234, 88, 12);
 }
 
 .approved {
-  background: #ecfdf5;
-  color: #059669;
+  background: rgb(215, 253, 235);
 }
 
 .rejected {
-  background: #fef2f2;
-  color: #dc2626;
+  background: rgb(247, 219, 219);
+}
+
+.completed {
+  background: #d4edf8;
 }
 
 .cancelBtn {

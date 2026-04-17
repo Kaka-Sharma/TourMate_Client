@@ -267,10 +267,11 @@ const Profile = () => {
                   )}
 
                   <p>
-                    Total: <FaRupeeSign className={styles.rupee}/> {booking.totalPrice}
+                    Total: <FaRupeeSign className={styles.rupee} />{" "}
+                    {booking.totalPrice}
                   </p>
 
-                  <p className={styles[booking.status]}>
+                  <p className={`${styles.status} ${styles[booking.status]}`}>
                     Status: {booking.status}
                   </p>
 
@@ -294,19 +295,21 @@ const Profile = () => {
                         </>
                       ) : (
                         <>
-                          <button
-                            className={styles.editBtn}
-                            onClick={() => handleEditBooking(booking)}
-                          >
-                            Edit
-                          </button>
+                          <div className={styles.buttons}>
+                            <button
+                              className={styles.editBtn}
+                              onClick={() => handleEditBooking(booking)}
+                            >
+                              Edit
+                            </button>
 
-                          <button
-                            className={styles.cancelBtn}
-                            onClick={() => handleDeleteBooking(booking._id)}
-                          >
-                            Cancel
-                          </button>
+                            <button
+                              className={styles.cancelBtn}
+                              onClick={() => handleDeleteBooking(booking._id)}
+                            >
+                              Cancel
+                            </button>
+                          </div>
                         </>
                       )}
                     </>

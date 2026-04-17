@@ -9,15 +9,18 @@ import Spinner from "../../../components/Spinner/Spinner";
 const DashboardHome = () => {
   const [stats, setStats] = useState([]);
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     const fetchStats = async () => {
       try {
         const [tours, users, bookings] = await Promise.all([
-          getTours(),
+          getTours({page: 1, limit: 1}),
           getUsers(),
           getBookings(),
         ]);
+
+        const totalTour = tours.total || 0
+
+        const totalUsers = users.length
 
         const revenue = bookings.reduce(
           (acc, item) => acc + (item.totalPrice || 0),
@@ -25,8 +28,8 @@ const DashboardHome = () => {
         );
 
         setStats([
-          { title: "Total Tours", value: tours.length },
-          { title: "Total Users", value: users.length },
+          { title: "Total Tours", value: totalTour },
+          { title: "Total Users", value: totalUsers },
           {
             title: "Revenue",
             value: (

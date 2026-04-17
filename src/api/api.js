@@ -80,7 +80,7 @@ const removeAvatar = async () => {
 const getTours = async (params = {}) => {
   try {
     const res = await api.get("/tour", { params });
-    return res.data.data;
+    return res.data;
   } catch (error) {
     throw handleError(error, "Failed to fetch tours");
   }
@@ -97,10 +97,10 @@ const getTour = async (id) => {
 };
 
 // get popular tours
-const getPopularTours = async () => {
+const getPopularTours = async (params ={}) => {
   try {
-    const res = await api.get("/tour/popular");
-    return res.data.data || [];
+    const res = await api.get("/tour/popular", {params});
+    return res.data;
   } catch (error) {
     throw handleError(error, "Failed to fetch popular tours");
   }
@@ -210,12 +210,22 @@ const approveBooking = async (id) => {
 // reject booking (Admin)
 const rejectBooking = async (id) => {
   try {
-    const res = await api.put(`booking/${id}/reject`);
+    const res = await api.put(`/booking/${id}/reject`);
     return res.data.data;
   } catch (error) {
     throw handleError(error, "Failed to reject booking");
   }
 };
+
+// complete booking (admin)
+const completeBooking = async(id) =>{
+  try {
+    const res = await api.put(`/booking/${id}/complete`)
+    return res.data.data
+  } catch (error) {
+    throw handleError(error, "Failed to complete booking")
+  }
+}
 
 // update booking
 const updateBooking = async (id, data) => {
@@ -311,6 +321,7 @@ export {
   approveBooking,
   rejectBooking,
   updateBooking,
+  completeBooking,
   deleteBooking,
   createUser,
   getUsers,

@@ -16,9 +16,15 @@ const Footer = () => {
       <div className={styles.container}>
         <div className={styles.section}>
           <div className={styles.logoContainer}>
-            <h2 className={styles.logo}>
-              <img src={Logo} alt="Logo" />
-            </h2>
+            <div>
+              <h2 className={styles.brandName}>
+                Tour<span className={styles.mate}>Mate</span>
+              </h2>
+              <h2 className={styles.logo}>
+                <img src={Logo} alt="TourMate Logo" />
+              </h2>
+            </div>
+
             <p className={styles.text}>
               Discover unforgettable travel experiences with us. Plan your next
               adventure easily and explore the world like never before.
@@ -58,9 +64,15 @@ const Footer = () => {
         <div className={styles.section}>
           <h3>Follow Us</h3>
           <div className={styles.socials}>
-            <FaFacebook />
-            <FaInstagram />
-            <FaTwitter />
+            <a href="#">
+              <FaFacebook />
+            </a>
+            <a href="#">
+              <FaInstagram />
+            </a>
+            <a href="#">
+              <FaTwitter />
+            </a>
           </div>
         </div>
       </div>

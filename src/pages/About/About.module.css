@@ -103,8 +103,24 @@
   margin-top: 50px;
   text-align: center;
   padding: 30px;
-
   background: rgba(108, 99, 255, 0.1);
   border-radius: 15px;
   font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+}
+
+.footerNote h3{
+  display: flex;
+  gap: 10px;
+}
+
+/* .planeContainer{
+  display: flex;
+} */
+
+.plane{
+  font-size: 35px;
 }

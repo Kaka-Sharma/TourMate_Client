@@ -16,7 +16,7 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 25px;
 }
 
@@ -35,8 +35,8 @@
   transform: translateY(-8px) scale(1.02);
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12);
 }
-.rupee{
-    font-size: 11px;
+.rupee {
+  font-size: 11px;
 }
 
 .card h3 {
@@ -59,7 +59,7 @@
   border-radius: 14px;
   font-size: 12px;
   font-weight: 600;
-
+  text-align: center;
   background: linear-gradient(135deg, #d1fae5, #a7f3d0);
   color: #065f46;
 }
@@ -125,6 +125,147 @@
   justify-content: center;
   align-items: center;
   height: 60vh;
+}
+
+.actionBtns {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.approveBtn {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: white;
+
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.approveBtn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+.approveBtn:hover::after {
+  left: 100%;
+}
+
+.approveBtn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 10px 20px rgba(34, 197, 94, 0.4);
+}
+
+.complete{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.completeBtn {
+  margin-top: 15px;
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.completeBtn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+.completeBtn:hover::after {
+  left: 100%;
+}
+
+.completeBtn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 10px 20px rgba(34, 197, 94, 0.4);
+}
+
+/* Reject Button */
+.rejectBtn {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+
+  background: linear-gradient(135deg, #f97316, #dc2626);
+  color: white;
+
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.rejectBtn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+.rejectBtn:hover::after {
+  left: 100%;
+}
+
+.rejectBtn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 10px 20px rgba(220, 38, 38, 0.4);
 }
 
 @media (max-width: 600px) {

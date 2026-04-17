@@ -3,7 +3,7 @@ import { deleteTour, getTours, toggleTour } from "../../../api/api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import styles from "./ManageTours.module.css";
-import ConfirmModal from "../../../components/ConfirmModal/ConfirmModal"; // adjust path if needed
+import ConfirmModal from "../../../components/ConfirmModal/ConfirmModal";
 
 import {
   FaRegArrowAltCircleRight,
@@ -23,12 +23,22 @@ const ManageTours = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedTourId, setSelectedTourId] = useState(null);
 
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
   const navigate = useNavigate();
 
   const fetchTours = async () => {
     try {
-      const data = await getTours();
-      setTours(data);
+      setLoading(true);
+
+      const res = await getTours({
+        page,
+        limit: 9,
+      });
+
+      setTours(res.data || []);
+      setTotalPages(res.totalPages || 1);
     } catch (error) {
       toast.error(error.message || "Failed to fetch tours");
     } finally {
@@ -38,7 +48,7 @@ const ManageTours = () => {
 
   useEffect(() => {
     fetchTours();
-  }, []);
+  }, [page]);
 
   const handleEditTour = (id) => {
     navigate(`/admin/edit-tour/${id}`);
@@ -54,9 +64,11 @@ const ManageTours = () => {
       await deleteTour(selectedTourId);
       toast.success("Tour deleted successfully");
 
-      setTours((prev) =>
-        prev.filter((tour) => tour._id !== selectedTourId)
-      );
+      if (tours.length === 1 && page > 1) {
+        setPage((prev) => prev - 1);
+      } else {
+        fetchTours();
+      }
 
       setShowModal(false);
       setSelectedTourId(null);
@@ -73,6 +85,7 @@ const ManageTours = () => {
   const handleToggle = async (id) => {
     try {
       const updatedTour = await toggleTour(id);
+
       setTours((prev) =>
         prev.map((tour) =>
           tour._id === id
@@ -152,7 +165,7 @@ const ManageTours = () => {
                         handlePrev(tour._id, tour.images.length)
                       }
                     >
-                      <FaRegArrowAltCircleLeft />
+                      <FaRegArrowAltCircleLeft className={styles.arrow} />
                     </button>
 
                     <button
@@ -161,7 +174,7 @@ const ManageTours = () => {
                         handleNext(tour._id, tour.images.length)
                       }
                     >
-                      <FaRegArrowAltCircleRight />
+                      <FaRegArrowAltCircleRight className={styles.arrow} />
                     </button>
                   </>
                 )}
@@ -170,7 +183,11 @@ const ManageTours = () => {
               <div className={styles.content}>
                 <h3 className={styles.title}>{tour.title}</h3>
                 <p className={styles.location}>{tour.location}</p>
-                <p className={styles.price}><FaRupeeSign className={styles.rupee}/>{tour.price}</p>
+
+                <p className={styles.price}>
+                  <FaRupeeSign className={styles.rupee} />
+                  {tour.price}
+                </p>
 
                 <div className={styles.actions}>
                   <button
@@ -209,6 +226,26 @@ const ManageTours = () => {
           ))}
         </div>
       )}
+
+      <div className={styles.pagination}>
+        <button
+          disabled={page === 1}
+          onClick={() => setPage((prev) => prev - 1)}
+        >
+          Prev
+        </button>
+
+        <span>
+          Page {page} of {totalPages}
+        </span>
+
+        <button
+          disabled={page === totalPages}
+          onClick={() => setPage((prev) => prev + 1)}
+        >
+          Next
+        </button>
+      </div>
 
       {showModal && (
         <ConfirmModal

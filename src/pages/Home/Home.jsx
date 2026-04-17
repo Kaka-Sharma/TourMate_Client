@@ -10,7 +10,12 @@ import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const [popularTours, setPopularTours] = useState([]);
-  const [search, setSearch] = useState(""); 
+  const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(true);
+
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
   const navigate = useNavigate();
 
   const handleClick = (id) => {
@@ -28,18 +33,28 @@ const Home = () => {
     }
   };
 
-  useEffect(() => {
-    const fetchPopularTours = async () => {
-      try {
-        const data = await getPopularTours();
-        setPopularTours(data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  const fetchPopularTours = async () => {
+    try {
+      setLoading(true);
 
+      const res = await getPopularTours({
+        page,
+        limit: 8,
+      });
+
+      setPopularTours(res.data || []);
+      setTotalPages(res.totalPages || 1);
+    } catch (error) {
+      console.error("Error fetching popular tours:", error);
+      setPopularTours([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
     fetchPopularTours();
-  }, []);
+  }, [page]);
 
   return (
     <div className={styles.home}>
@@ -75,26 +90,54 @@ const Home = () => {
           <FaMapMarkedAlt /> Popular Tours
         </h2>
 
-        <div className={styles.tourGrid}>
-          {popularTours.length === 0 ? (
-            <p>No popular tours found</p>
-          ) : (
-            popularTours.map((tour) => (
-              <div
-                key={tour._id}
-                className={styles.card}
-                onClick={() => handleClick(tour._id)}
+        {loading ? (
+          <div className={styles.loader}></div>
+        ) : popularTours.length === 0 ? (
+          <p>No popular tours found</p>
+        ) : (
+          <>
+            <div className={styles.tourGrid}>
+              {popularTours.map((tour) => (
+                <div
+                  key={tour._id}
+                  className={styles.card}
+                  onClick={() => handleClick(tour._id)}
+                >
+                  <img
+                    src={tour.images?.[0]?.url}
+                    alt={tour.title}
+                  />
+                  <h3>{tour.title}</h3>
+                  <p>
+                    Starting from{" "}
+                    <FaRupeeSign className={styles.rupee} />
+                    {tour.price}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <div className={styles.pagination}>
+              <button
+                disabled={page === 1}
+                onClick={() => setPage((prev) => prev - 1)}
               >
-                <img src={tour.images?.[0]?.url} alt={tour.title} />
-                <h3>{tour.title}</h3>
-                <p>
-                  Starting from <FaRupeeSign className={styles.rupee} />
-                  {tour.price}
-                </p>
-              </div>
-            ))
-          )}
-        </div>
+                Prev
+              </button>
+
+              <span>
+                Page {page} of {totalPages}
+              </span>
+
+              <button
+                disabled={page === totalPages}
+                onClick={() => setPage((prev) => prev + 1)}
+              >
+                Next
+              </button>
+            </div>
+          </>
+        )}
       </section>
 
       <section className={styles.features}>
