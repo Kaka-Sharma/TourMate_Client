@@ -83,3 +83,176 @@
   line-height: 1.6;
   font-size: 15px;
 }
+
+/* Tablets (≤1024px) */
+@media (max-width: 1024px) {
+  .container {
+    padding: 20px;
+  }
+
+  .heading {
+    font-size: 24px;
+  }
+
+  .card h3 {
+    font-size: 24px;
+  }
+}
+
+
+/* Mobile (≤768px) */
+@media (max-width: 768px) {
+  .container {
+    padding: 18px;
+  }
+
+  .heading {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+
+  .cards {
+    gap: 15px;
+  }
+
+  .card {
+    padding: 18px;
+    border-radius: 14px;
+  }
+
+  .card h3 {
+    font-size: 22px;
+  }
+
+  .card p {
+    font-size: 13px;
+  }
+
+  .rupee {
+    font-size: 18px;
+  }
+
+  .iconContainer {
+    gap: 4px;
+  }
+
+  .welcome {
+    padding: 20px;
+  }
+
+  .welcome h3 {
+    font-size: 18px;
+  }
+
+  .welcome p {
+    font-size: 14px;
+  }
+}
+
+
+/* Small Mobile (≤480px) */
+@media (max-width: 480px) {
+  .container {
+    padding: 15px;
+  }
+
+  .heading {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .card {
+    padding: 16px;
+  }
+
+  .card h3 {
+    font-size: 20px;
+  }
+
+  .card p {
+    font-size: 12px;
+  }
+
+  .rupee {
+    font-size: 16px;
+  }
+
+  .iconContainer {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .welcome {
+    padding: 18px;
+    text-align: center;
+  }
+
+  .welcome h3 {
+    font-size: 17px;
+  }
+
+  .welcome p {
+    font-size: 13px;
+  }
+}
+
+
+/* Very Small Devices (≤360px) */
+@media (max-width: 360px) {
+  .heading {
+    font-size: 18px;
+  }
+
+  .card {
+    padding: 14px;
+  }
+
+  .card h3 {
+    font-size: 18px;
+  }
+
+  .card p {
+    font-size: 11px;
+  }
+
+  .welcome h3 {
+    font-size: 16px;
+  }
+
+  .welcome p {
+    font-size: 12px;
+  }
+}
+
+
+/* Large Screens (≥1200px) */
+@media (min-width: 1200px) {
+  .container {
+    padding: 30px 40px;
+  }
+
+  .heading {
+    font-size: 30px;
+  }
+
+  .card {
+    padding: 25px;
+  }
+
+  .card h3 {
+    font-size: 28px;
+  }
+
+  .welcome h3 {
+    font-size: 22px;
+  }
+
+  .welcome p {
+    font-size: 16px;
+  }
+}

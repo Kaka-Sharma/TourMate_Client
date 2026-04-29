@@ -81,9 +81,93 @@
   font-size: 0.9rem;
 }
 
-/* Mobile */
-@media (max-width: 480px) {
+/* ================= RESPONSIVE ================= */
+
+/* Tablets (≤1024px) */
+@media (max-width: 1024px) {
   .card {
-    padding: 30px 20px;
+    max-width: 320px;
+    padding: 35px;
+  }
+}
+
+
+/* Mobile (≤768px) */
+@media (max-width: 768px) {
+  .container {
+    padding: 20px;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 100%;
+    padding: 30px 25px;
+  }
+
+  .card h2 {
+    font-size: 22px;
+  }
+
+  .card p {
+    font-size: 0.85rem;
+  }
+
+  .loginForm input {
+    font-size: 0.85rem;
+    padding: 9px;
+  }
+
+  .loginForm button {
+    font-size: 0.95rem;
+    padding: 9px;
+  }
+}
+
+
+/* Small Mobile (≤480px) */
+@media (max-width: 480px) {
+  .container {
+    padding: 15px;
+    align-items: flex-start; /* prevents vertical squeeze */
+  }
+
+  .card {
+    padding: 25px 18px;
+    margin-top: 40px; /* better spacing from top */
+  }
+
+  .card h2 {
+    font-size: 20px;
+  }
+
+  .card p {
+    font-size: 0.8rem;
+  }
+
+  .loginForm {
+    gap: 10px;
+  }
+
+  .loginForm input {
+    font-size: 0.8rem;
+    padding: 8px;
+  }
+
+  .loginForm button {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+}
+
+
+/* Large Screens (≥1200px) */
+@media (min-width: 1200px) {
+  .card {
+    max-width: 380px;
+    padding: 45px;
+  }
+
+  .card h2 {
+    font-size: 26px;
   }
 }

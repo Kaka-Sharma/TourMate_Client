@@ -85,15 +85,6 @@
   font-weight: 500;
 }
 
-.pagination button {
-  padding: 8px 14px;
-  border: 1px solid rgb(209, 213, 219);
-  border-radius: 6px;
-  background: white;
-  color: rgb(55, 65, 81);
-  cursor: pointer;
-}
-
 .pagination button:hover:not(:disabled) {
   background: rgb(59, 130, 246);
   color: white;
@@ -103,5 +94,107 @@
 @keyframes spin {
   to {
     transform: rotate(360deg);
+  }
+}
+
+/* Large Tablets (≤1024px) */
+@media (max-width: 1024px) {
+  .container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+
+  .heading {
+    font-size: 26px;
+  }
+
+  .map {
+    font-size: 26px;
+  }
+}
+
+
+/* Mobile (≤768px) */
+@media (max-width: 768px) {
+  .wrapper {
+    padding: 30px 15px;
+  }
+
+  .container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .heading {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .map {
+    font-size: 24px;
+  }
+
+  .pagination {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .pagination span {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+
+/* Small Mobile (≤480px) */
+@media (max-width: 480px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+
+  .heading {
+    font-size: 22px;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .map {
+    font-size: 22px;
+    margin: 0;
+  }
+
+  .pagination {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .pagination button {
+    width: 100%;
+    max-width: 200px;
+  }
+
+  .pagination span {
+    font-size: 14px;
+  }
+
+  .empty {
+    font-size: 16px;
+  }
+}
+
+
+/* Extra Small Devices (≤360px) */
+@media (max-width: 360px) {
+  .heading {
+    font-size: 20px;
+  }
+
+  .pagination button {
+    font-size: 13px;
+    padding: 6px 10px;
+  }
+
+  .pagination span {
+    font-size: 13px;
   }
 }

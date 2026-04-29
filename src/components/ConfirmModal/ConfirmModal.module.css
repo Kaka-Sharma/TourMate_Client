@@ -75,3 +75,85 @@
     opacity: 1;
   }
 }
+
+/* Tablet (≤1024px) */
+@media (max-width: 1024px) {
+  .modal {
+    width: 300px;
+    padding: 22px 25px;
+  }
+}
+
+
+/* Mobile (≤768px) */
+@media (max-width: 768px) {
+  .modal {
+    width: 90%;
+    max-width: 350px;
+    padding: 20px;
+  }
+
+  .modal h3 {
+    font-size: 18px;
+  }
+
+  .modal p {
+    font-size: 13px;
+  }
+
+  .actions {
+    gap: 8px;
+  }
+}
+
+
+/* Small Mobile (≤480px) */
+@media (max-width: 480px) {
+  .modal {
+    width: 92%;
+    padding: 18px;
+    border-radius: 12px;
+  }
+
+  .modal h3 {
+    font-size: 16px;
+  }
+
+  .modal p {
+    font-size: 12px;
+    margin-bottom: 15px;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .cancelBtn,
+  .confirmBtn {
+    width: 100%;
+    padding: 10px;
+    font-size: 13px;
+  }
+}
+
+
+/* Extra Small Devices (≤360px) */
+@media (max-width: 360px) {
+  .modal {
+    padding: 15px;
+  }
+
+  .modal h3 {
+    font-size: 15px;
+  }
+
+  .modal p {
+    font-size: 11px;
+  }
+
+  .cancelBtn,
+  .confirmBtn {
+    font-size: 12px;
+    padding: 8px;
+  }
+}

@@ -68,7 +68,7 @@ const DashboardHome = () => {
           );
         })}
       </div>
-      <div className={styles.sir}>
+      <div className={styles.welcome}>
         <h3>Welcome Sir</h3>
         <p>
           Manage tours, users, and bookings from this dashboard. Keep your

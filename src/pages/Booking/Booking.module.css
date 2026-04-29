@@ -117,12 +117,144 @@
   height: 60vh;
 }
 
-@media (max-width: 600px) {
+/* Tablets (≤1024px) */
+@media (max-width: 1024px) {
+  .container {
+    padding: 40px 20px;
+  }
+
+  .container h2 {
+    font-size: 26px;
+  }
+
   .card {
-    padding: 20px;
+    padding: 25px;
+  }
+}
+
+
+/* Mobile (≤768px) */
+@media (max-width: 768px) {
+  .container {
+    padding: 30px 15px;
   }
 
   .container h2 {
     font-size: 24px;
+  }
+
+  .card {
+    padding: 22px;
+    border-radius: 16px;
+  }
+
+  .card h3 {
+    font-size: 20px;
+  }
+
+  .card p {
+    font-size: 13px;
+  }
+
+  .inputGroup input {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .bookBtn {
+    padding: 12px;
+    font-size: 14px;
+  }
+}
+
+
+/* Small Mobile (≤480px) */
+@media (max-width: 480px) {
+  .container {
+    padding: 25px 12px;
+  }
+
+  .container h2 {
+    font-size: 22px;
+  }
+
+  .card {
+    padding: 18px;
+    border-radius: 14px;
+  }
+
+  .card h3 {
+    font-size: 18px;
+  }
+
+  .card p {
+    font-size: 12px;
+  }
+
+  .inputGroup label {
+    font-size: 13px;
+  }
+
+  .inputGroup input {
+    padding: 9px;
+    font-size: 13px;
+  }
+
+  .bookBtn {
+    padding: 11px;
+    font-size: 13px;
+  }
+
+  .rupee {
+    font-size: 11px;
+  }
+
+  .rupee1 {
+    font-size: 10px;
+  }
+}
+
+
+/* Very Small Devices (≤360px) */
+@media (max-width: 360px) {
+  .container h2 {
+    font-size: 20px;
+  }
+
+  .card {
+    padding: 15px;
+  }
+
+  .card h3 {
+    font-size: 16px;
+  }
+
+  .bookBtn {
+    font-size: 12px;
+    padding: 10px;
+  }
+}
+
+
+/* Large Screens (≥1200px) */
+@media (min-width: 1200px) {
+  .container {
+    max-width: 650px;
+  }
+
+  .container h2 {
+    font-size: 32px;
+  }
+
+  .card {
+    padding: 35px;
+  }
+
+  .card h3 {
+    font-size: 24px;
+  }
+
+  .bookBtn {
+    font-size: 16px;
   }
 }

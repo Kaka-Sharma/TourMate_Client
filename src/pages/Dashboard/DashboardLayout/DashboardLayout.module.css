@@ -10,11 +10,10 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
- background: linear-gradient(
-    -135deg,
-    rgba(0, 0, 0, 0.85),
-    rgba(37, 95, 145, 0.85)
-  );  backdrop-filter: blur(18px);
+  background: linear-gradient(-135deg,
+      rgba(0, 0, 0, 0.85),
+      rgba(37, 95, 145, 0.85));
+  backdrop-filter: blur(18px);
   color: white;
   border-right: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
@@ -44,6 +43,7 @@
 .logo img {
   width: 35%;
 }
+
 .nav {
   display: flex;
   flex-direction: column;
@@ -73,12 +73,10 @@
   width: 100%;
   height: 100%;
 
-  background: linear-gradient(
-    120deg,
-    transparent,
-    rgba(255, 255, 255, 0.3),
-    transparent
-  );
+  background: linear-gradient(120deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent);
 
   transition: 0.5s;
 }
@@ -160,11 +158,10 @@
 
   padding: 18px 25px;
 
- background: linear-gradient(
-    -135deg,
-    rgba(37, 95, 145, 0.85),
-    rgba(0, 0, 0, 0.85)
-  );  backdrop-filter: blur(18px);
+  background: linear-gradient(-135deg,
+      rgba(37, 95, 145, 0.85),
+      rgba(0, 0, 0, 0.85));
+  backdrop-filter: blur(18px);
   backdrop-filter: blur(12px);
 
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
@@ -180,24 +177,121 @@
   overflow-y: auto;
 }
 
-@media (max-width: 900px) {
+.menuBtn {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+  z-index: 1100; /* important */
+}
+
+/* Tablets (≤1024px) */
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 200px;
+    padding: 20px 14px;
+  }
+
+  .logo {
+    font-size: 20px;
+  }
+
+  .nav a {
+    font-size: 14px;
+    padding: 10px 14px;
+  }
+
+  .topbar h3 {
+    font-size: 16px;
+  }
+}
+
+
+/* Mobile (≤768px) */
+@media (max-width: 768px) {
+  .dashboard {
+    flex-direction: row;
+  }
+
+  .menuBtn {
+    display: block;
+  }
+
+  .sidebar {
+    position: fixed;
+    left: -260px;
+    top: 0;
+    height: 100%;
+    width: 230px;
+    z-index: 1000;
+    transition: 0.3s ease;
+  }
+
+  /* When sidebar is active (we'll toggle via class) */
+  .sidebar.activeSidebar {
+    left: 0;
+  }
+
+  .main {
+    width: 100%;
+  }
+
+  .topbar {
+    justify-content: space-between;
+    padding: 15px;
+  }
+
+  .topbar h3 {
+    font-size: 15px;
+  }
+
+  /* Add space so content doesn't hide behind topbar */
+  .content {
+    padding: 10px;
+  }
+}
+
+
+/* Small Mobile (≤480px) */
+@media (max-width: 480px) {
   .sidebar {
     width: 200px;
   }
+
+  .logo {
+    font-size: 18px;
+  }
+
+  .logo img {
+    width: 50%;
+  }
+
+  .nav a {
+    font-size: 13px;
+    padding: 9px 12px;
+    gap: 8px;
+  }
+
+  .logout {
+    padding: 10px;
+    font-size: 13px;
+  }
+
+  .topbar h3 {
+    font-size: 14px;
+  }
 }
 
-@media (max-width: 700px) {
-  .dashboard {
-    flex-direction: column;
-  }
 
-  .sidebar {
-    width: 100%;
-    flex-direction: row;
-    overflow-x: auto;
-  }
-
-  .nav {
-    flex-direction: row;
-  }
+.sidebarOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 999;
 }
+

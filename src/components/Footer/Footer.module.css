@@ -144,15 +144,112 @@
   letter-spacing: 0.5px;
 }
 
-/* ✨ Responsive */
+/* Tablet (≤1024px) */
+@media (max-width: 1024px) {
+  .container {
+    padding: 50px 30px;
+    gap: 40px;
+  }
+
+  .logo img {
+    width: 90px;
+  }
+
+  .text {
+    font-size: 13px;
+  }
+}
+
+
+/* Mobile (≤768px) */
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
-    gap: 30px;
+    align-items: center;
+    text-align: center;
+    padding: 40px 20px;
+    gap: 35px;
+  }
+
+  .section {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .section h3::after {
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .logoContainer {
-    flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    text-align: center;
+    gap: 15px;
+  }
+
+  .icons p {
+    justify-content: center;
+  }
+
+  .socials {
+    justify-content: center;
+  }
+}
+
+
+/* Small Mobile (≤480px) */
+@media (max-width: 480px) {
+  .container {
+    padding: 30px 15px;
+    gap: 25px;
+  }
+
+  .brandName {
+    font-size: 16px;
+  }
+
+  .logo img {
+    width: 80px;
+  }
+
+  .text {
+    font-size: 12px;
+  }
+
+  .section h3 {
+    font-size: 16px;
+  }
+
+  .icons p {
+    font-size: 12px;
+  }
+
+  .socials svg {
+    font-size: 18px;
+  }
+
+  .bottom {
+    font-size: 12px;
+    padding: 15px;
+  }
+}
+
+
+/* Extra Small Devices (≤360px) */
+@media (max-width: 360px) {
+  .logo img {
+    width: 70px;
+  }
+
+  .text {
+    font-size: 11px;
+  }
+
+  .section h3 {
+    font-size: 15px;
+  }
+
+  .icons p {
+    font-size: 11px;
   }
 }

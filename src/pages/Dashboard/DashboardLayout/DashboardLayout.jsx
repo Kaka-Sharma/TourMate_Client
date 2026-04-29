@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./DashboardLayout.module.css";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
@@ -11,11 +11,13 @@ import {
   FaUsers,
   FaPlus,
   FaSignOutAlt,
+  FaBars,
 } from "react-icons/fa";
 
 const DashboardLayout = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false); // ✅ added
 
   const handleLogout = async () => {
     try {
@@ -29,45 +31,76 @@ const DashboardLayout = () => {
 
   return (
     <div className={styles.dashboard}>
-      <aside className={styles.sidebar}>
+      
+      {/* ✅ Overlay (mobile) */}
+      {open && (
+        <div
+          className={styles.sidebarOverlay}
+          onClick={() => setOpen(false)}
+        ></div>
+      )}
+
+      {/* ✅ Sidebar */}
+      <aside
+        className={`${styles.sidebar} ${
+          open ? styles.activeSidebar : ""
+        }`}
+      >
         <h2 className={styles.logo}>
-          <p className={styles.tour}>Tour<span className={styles.mate}>Mate</span></p>
-          <img src={Logo} alt="Logo" />{" "}
+          <p className={styles.tour}>
+            Tour<span className={styles.mate}>Mate</span>
+          </p>
+          <img src={Logo} alt="Logo" />
         </h2>
 
         <nav className={styles.nav}>
           <NavLink
             to="/admin"
             end
-            className={({ isActive }) => (isActive ? styles.active : "")}
+            onClick={() => setOpen(false)} 
+            className={({ isActive }) =>
+              isActive ? styles.active : ""
+            }
           >
             <FaHome /> <span>Dashboard</span>
           </NavLink>
 
           <NavLink
             to="/admin/add-tour"
-            className={({ isActive }) => (isActive ? styles.active : "")}
+            onClick={() => setOpen(false)}
+            className={({ isActive }) =>
+              isActive ? styles.active : ""
+            }
           >
             <FaPlus /> <span>Add Tour</span>
           </NavLink>
 
           <NavLink
             to="/admin/tours"
-            className={({ isActive }) => (isActive ? styles.active : "")}
+            onClick={() => setOpen(false)}
+            className={({ isActive }) =>
+              isActive ? styles.active : ""
+            }
           >
             <FaMapMarkedAlt /> <span>Manage Tours</span>
           </NavLink>
 
           <NavLink
             to="/admin/bookings"
-            className={({ isActive }) => (isActive ? styles.active : "")}
+            onClick={() => setOpen(false)}
+            className={({ isActive }) =>
+              isActive ? styles.active : ""
+            }
           >
             <FaClipboardList /> <span>Bookings</span>
           </NavLink>
 
           <NavLink
             to="/admin/users"
-            className={({ isActive }) => (isActive ? styles.active : "")}
+            onClick={() => setOpen(false)}
+            className={({ isActive }) =>
+              isActive ? styles.active : ""
+            }
           >
             <FaUsers /> <span>Users</span>
           </NavLink>
@@ -80,6 +113,14 @@ const DashboardLayout = () => {
 
       <div className={styles.main}>
         <header className={styles.topbar}>
+          
+          <button
+            className={styles.menuBtn}
+            onClick={() => setOpen(true)}
+          >
+            <FaBars/>
+          </button>
+
           <h3>Welcome, {user?.name}</h3>
         </header>
 

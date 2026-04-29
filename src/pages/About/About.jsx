@@ -72,9 +72,9 @@ const About = () => {
       <section className={styles.footerNote}>
         <h3>
           Start your journey with TourMate today{" "}
-          <div className={styles.planeContainer}>
+          <span className={styles.planeContainer}>
             <FaPlaneDeparture className={styles.plane} />
-          </div>
+          </span>
         </h3>
       </section>
     </div>

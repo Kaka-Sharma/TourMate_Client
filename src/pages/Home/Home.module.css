@@ -226,12 +226,148 @@
   border-color: rgb(59, 130, 246);
 }
 
-@media (max-width: 768px) {
+/* Tablets (≤1024px) */
+@media (max-width: 1024px) {
+  .hero {
+    height: 60vh;
+    padding: 0 20px;
+  }
+
+  .heroContent {
+    padding: 30px;
+  }
+
   .heroContent h1 {
-    font-size: 32px;
+    font-size: 36px;
+  }
+
+  .tourGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .popular h2,
+  .features h2 {
+    font-size: 28px;
+  }
+}
+
+
+/* Mobile (≤768px) */
+@media (max-width: 768px) {
+  .hero {
+    height: auto;
+    padding: 60px 15px;
+  }
+
+  .heroContent {
+    padding: 25px 15px;
+  }
+
+  .heroContent h1 {
+    font-size: 28px;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .heroContent p {
+    font-size: 15px;
   }
 
   .heroSearch {
     width: 100%;
+    padding: 6px 10px;
+  }
+
+  .heroSearch input {
+    font-size: 14px;
+  }
+
+  .tourGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  .card img {
+    height: 150px;
+  }
+
+  .card h3 {
+    font-size: 16px;
+  }
+
+  .card p {
+    font-size: 14px;
+  }
+
+  .pagination {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+
+/* Small Mobile (≤480px) */
+@media (max-width: 480px) {
+  .heroContent h1 {
+    font-size: 22px;
+  }
+
+  .heroContent p {
+    font-size: 13px;
+  }
+
+  .heroSearch {
+    border-radius: 30px;
+  }
+
+  .tourGrid {
+    grid-template-columns: 1fr; /* force single column */
+  }
+
+  .card img {
+    height: 140px;
+  }
+
+  .popular {
+    padding: 40px 15px;
+  }
+
+  .features {
+    padding: 40px 15px;
+  }
+
+  .featureGrid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .featureCard {
+    padding: 20px;
+  }
+
+  .featureIcon {
+    font-size: 26px;
+  }
+
+  .pagination span {
+    font-size: 13px;
+  }
+}
+
+
+/* Large Screens (≥1200px) */
+@media (min-width: 1200px) {
+  .heroContent h1 {
+    font-size: 52px;
+  }
+
+  .tourGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .popular h2,
+  .features h2 {
+    font-size: 34px;
   }
 }

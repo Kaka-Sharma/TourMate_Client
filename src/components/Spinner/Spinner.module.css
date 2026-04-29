@@ -18,3 +18,58 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+/* Tablet (≤1024px) */
+@media (max-width: 1024px) {
+  .spinnerContainer {
+    height: 45vh;
+  }
+
+  .loader {
+    width: 55px;
+    height: 55px;
+    border-width: 7px;
+  }
+}
+
+
+/* Mobile (≤768px) */
+@media (max-width: 768px) {
+  .spinnerContainer {
+    height: 40vh;
+  }
+
+  .loader {
+    width: 50px;
+    height: 50px;
+    border-width: 6px;
+  }
+}
+
+
+/* Small Mobile (≤480px) */
+@media (max-width: 480px) {
+  .spinnerContainer {
+    height: 35vh;
+  }
+
+  .loader {
+    width: 42px;
+    height: 42px;
+    border-width: 5px;
+  }
+}
+
+
+/* Extra Small Devices (≤360px) */
+@media (max-width: 360px) {
+  .spinnerContainer {
+    height: 30vh;
+  }
+
+  .loader {
+    width: 36px;
+    height: 36px;
+    border-width: 4px;
+  }
+}

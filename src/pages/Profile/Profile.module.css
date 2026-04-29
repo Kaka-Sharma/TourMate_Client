@@ -366,3 +366,171 @@
     transform: translate(-50%, 0);
   }
 }
+
+/* Tablets (≤1024px) */
+@media (max-width: 1024px) {
+  .container {
+    padding: 30px 20px;
+  }
+
+  .welcome {
+    font-size: 28px;
+  }
+
+  .profileCard {
+    padding: 25px;
+  }
+
+  .avatarWrapper {
+    width: 120px;
+    height: 120px;
+  }
+
+  .bookingSection {
+    padding: 25px 20px;
+  }
+
+  .bookingSection h3 {
+    font-size: 24px;
+  }
+}
+
+
+/* Mobile (≤768px) */
+@media (max-width: 768px) {
+  .container {
+    padding: 25px 15px;
+  }
+
+  .welcome {
+    font-size: 24px;
+  }
+
+  .profileCard {
+    padding: 20px;
+  }
+
+  .avatarWrapper {
+    width: 100px;
+    height: 100px;
+  }
+
+  .editIcon {
+    padding: 6px;
+    font-size: 10px;
+  }
+
+  .avatarMenu {
+    top: 120%;
+    width: 140px;
+  }
+
+  .menuItem {
+    font-size: 13px;
+    padding: 10px;
+  }
+
+  .profileCard p {
+    font-size: 14px;
+  }
+
+  .bookingSection {
+    padding: 20px 15px;
+  }
+
+  .bookingGrid {
+    gap: 18px;
+  }
+
+  .bookingCard {
+    padding: 18px;
+  }
+
+  .bookingCard h4 {
+    font-size: 18px;
+  }
+
+  .bookingCard p {
+    font-size: 13px;
+  }
+
+  .buttons {
+    flex-direction: column;
+  }
+
+  .editBtn,
+  .cancelBtn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+
+/* Small Mobile (≤480px) */
+@media (max-width: 480px) {
+  .welcome {
+    font-size: 20px;
+  }
+
+  .profileCard {
+    padding: 18px;
+  }
+
+  .avatarWrapper {
+    width: 85px;
+    height: 85px;
+  }
+
+  .avatarMenu {
+    width: 120px;
+  }
+
+  .menuItem {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .updateBtn {
+    padding: 8px 18px;
+    font-size: 13px;
+  }
+
+  .bookingSection h3 {
+    font-size: 20px;
+  }
+
+  .bookingGrid {
+    grid-template-columns: 1fr; /* force single column */
+  }
+
+  .bookingCard {
+    padding: 16px;
+  }
+
+  .status {
+    font-size: 11px;
+  }
+
+  .editBtn,
+  .cancelBtn {
+    font-size: 12px;
+    padding: 7px 10px;
+  }
+}
+
+
+/* Large Screens (≥1200px) */
+@media (min-width: 1200px) {
+  .welcome {
+    font-size: 34px;
+  }
+
+  .avatarWrapper {
+    width: 150px;
+    height: 150px;
+  }
+
+  .bookingSection h3 {
+    font-size: 28px;
+  }
+}

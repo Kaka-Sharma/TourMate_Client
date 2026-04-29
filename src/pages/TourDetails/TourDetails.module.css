@@ -91,16 +91,108 @@
   box-shadow: 0 10px 20px rgba(108, 99, 255, 0.4);
 }
 
+/* Tablets (≤1024px) */
+@media (max-width: 1024px) {
+  .container {
+    padding: 30px 20px;
+  }
+
+  .title {
+    font-size: 30px;
+  }
+
+  .image {
+    height: 320px;
+  }
+
+  .info {
+    padding: 22px;
+    gap: 10px 15px;
+  }
+}
+
+
+/* Mobile (≤768px) */
 @media (max-width: 768px) {
+  .container {
+    padding: 25px 15px;
+  }
+
+  .title {
+    font-size: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .popular {
+    margin-left: 0;
+    align-self: center;
+  }
+
   .image {
     height: 250px;
+    border-radius: 12px;
   }
 
   .info {
     grid-template-columns: 1fr;
+    padding: 20px;
   }
 
+  .info p {
+    font-size: 14px;
+  }
+
+  .bookBtn {
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+  }
+}
+
+
+/* Small Mobile (≤480px) */
+@media (max-width: 480px) {
   .title {
-    font-size: 26px;
+    font-size: 20px;
+  }
+
+  .popular {
+    font-size: 13px;
+    padding: 3px 8px;
+  }
+
+  .image {
+    height: 200px;
+  }
+
+  .info {
+    padding: 18px;
+  }
+
+  .info p {
+    font-size: 13px;
+  }
+
+  .bookBtn {
+    font-size: 13px;
+    padding: 10px;
+  }
+}
+
+
+/* Large Screens (≥1200px) */
+@media (min-width: 1200px) {
+  .title {
+    font-size: 38px;
+  }
+
+  .image {
+    height: 450px;
+  }
+
+  .info {
+    padding: 30px 35px;
   }
 }
