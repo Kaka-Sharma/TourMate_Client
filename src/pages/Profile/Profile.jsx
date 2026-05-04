@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "./Profile.module.css";
 import { useNavigate } from "react-router-dom";
 import { FaCamera, FaRupeeSign, FaUser } from "react-icons/fa";
+import Spinner from "../../components/Spinner/Spinner";
 import {
   getProfile,
   removeAvatar,
@@ -160,12 +161,24 @@ const Profile = () => {
     }
   };
 
-  if (loading) return <p className={styles.loading}>Loading...</p>;
+  if (loading)
+    return (
+      <div className={styles.loading}>
+        <Spinner />
+      </div>
+    );
 
   return (
-    <div className={styles.container}>
-      <h2 className={styles.welcome}>Hello, {user?.name}</h2>
-
+    <div
+      className={styles.container}
+      style={{
+        "--profile-bg": preview
+          ? `url(${preview})`
+          : user?.avatar
+            ? `url(${user.avatar})`
+            : "none",
+      }}
+    >
       <div className={styles.profileCard}>
         <input
           type="file"
@@ -234,10 +247,10 @@ const Profile = () => {
         )}
 
         <p>
-          <strong>Name:</strong> {user.name}
+          <strong></strong> {user.name}
         </p>
         <p>
-          <strong>Email:</strong> {user.email}
+          <strong></strong> {user.email}
         </p>
 
         {user?.role === "admin" && <span className={styles.role}>Admin</span>}
@@ -246,7 +259,6 @@ const Profile = () => {
       {user?.role === "user" && (
         <div className={styles.bookingSection}>
           <h3>My Bookings</h3>
-
           {bookings.length === 0 ? (
             <p>No bookings yet</p>
           ) : (
@@ -267,7 +279,7 @@ const Profile = () => {
                   )}
 
                   <p>
-                    Total: <FaRupeeSign className={styles.rupee} />{" "}
+                    Total: <FaRupeeSign className={styles.rupee} />
                     {booking.totalPrice}
                   </p>
 

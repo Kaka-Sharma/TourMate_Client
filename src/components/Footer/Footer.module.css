@@ -1,8 +1,8 @@
 .footer {
   background: linear-gradient(135deg, #141e30, #243b55);
   color: #fff;
-  margin-top: 60px;
   font-family: "Poppins", sans-serif;
+  margin-bottom: 0;
 }
 
 .container {
