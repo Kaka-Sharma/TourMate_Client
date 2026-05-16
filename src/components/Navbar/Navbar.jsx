@@ -38,7 +38,7 @@ const Navbar = () => {
   };
 
   return (
-    <header>
+    <header className={styles.header}>
       <div className={styles.topHeader}>
         <div className={styles.topRight}>
           {loading ? null : !isLoggedIn ? (

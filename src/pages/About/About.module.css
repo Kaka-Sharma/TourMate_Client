@@ -1,17 +1,32 @@
 .container {
-  max-width: 1100px;
+  display: flex;
+  height: 400px;
+  background-image: url('../../../public/TourMate2.jpg');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  gap: 0;
+  overflow: hidden;
+}
+
+.about {
+  height: 400px;
   margin: auto;
-  padding: 50px 20px;
+  padding: 20px 20px;
+  background-image: url('../../../public/BackGround3.png');
+  background-size: 115% 100%;
+  border-radius: 400px 0 0 0;
+  overflow: hidden;
 }
 
 .hero {
   text-align: center;
   padding: 60px 20px;
-  border-radius: 20px;
-
-  background: linear-gradient(135deg, #6c63ff, #00c6ff);
+  background-image: url('../../../public/BackGround.png');
+  background-size: 150% 100%;
+  background-repeat: no-repeat;
+  border-radius: 0 0 400px 0;
   color: white;
-
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
 }
 
@@ -26,8 +41,15 @@
 }
 
 .section {
-  margin-top: 40px;
+  height: 100%;
   text-align: center;
+  margin-top: 200px;
+}
+
+.mission {
+  height: 100%;
+  text-align: center;
+  margin-top: 50px;
 }
 
 .section h2 {
@@ -43,15 +65,33 @@
 }
 
 .section p {
-  color: #4b5563;
+  color: rgb(75, 85, 99);
   font-size: 15px;
   line-height: 1.6;
   max-width: 800px;
   margin: auto;
 }
 
+.featureContainer{
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.featureImg{
+  width: 500px;
+   border-radius: 30px;
+}
+
+.featuredImg{
+  padding-top: 70px;
+  margin: 25px;
+}
+
 .features {
-  margin-top: 50px;
+  width: 100%;
+  padding-bottom: 10px;
   text-align: center;
 }
 
@@ -65,6 +105,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   gap: 20px;
+  padding: 0 15px;
 }
 
 .card {
@@ -112,16 +153,38 @@
   gap: 25px;
 }
 
-.footerNote h3{
+.footerNote h3 {
   display: flex;
   gap: 10px;
 }
 
-/* .planeContainer{
+.planeContainer {
   display: flex;
-} */
+  align-items: center;
+}
 
-.plane{
+.plane {
+  font-size: 34px;
+  color: #6c63ff;
+
+  animation: fly 2s ease-in-out infinite;
+}
+
+@keyframes fly {
+  0% {
+    transform: translateX(0px) rotate(0deg);
+  }
+
+  50% {
+    transform: translateX(10px) translateY(-5px) rotate(8deg);
+  }
+
+  100% {
+    transform: translateX(0px) rotate(0deg);
+  }
+}
+
+.plane {
   font-size: 35px;
 }
 
