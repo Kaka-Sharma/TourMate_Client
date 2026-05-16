@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./About.module.css";
-import featureImg from "../../../public/BackGround2.png";
+import featureImg from "/BackGround2.png";
 import {
   FaMapMarkedAlt,
   FaShieldAlt,
