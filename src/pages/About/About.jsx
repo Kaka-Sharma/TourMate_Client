@@ -22,7 +22,7 @@ const About = () => {
 
         <div className={styles.about}>
           <section className={styles.section}>
-            <h2>Explore The World With TourMate</h2>
+            <h2>Explore The World With Tour<span className={styles.mate}>Mate</span></h2>
             <p>
               TourMate is a modern tour booking platform designed to make travel
               planning simple, fast, and enjoyable. We connect travelers with

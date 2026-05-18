@@ -1,8 +1,8 @@
 .container {
   display: flex;
   height: 400px;
-  background-image: url('/TourMate2.jpg');
-  background-size: 100% 100%;
+  background-image: url('/BackGround3.png');
+  background-size: 100% 125%;
   background-repeat: no-repeat;
   background-position: center;
   gap: 0;
@@ -13,10 +13,6 @@
   height: 400px;
   margin: auto;
   padding: 20px 20px;
-  background-image: url('/BackGround3.png');
-  background-size: 115% 100%;
-  border-radius: 400px 0 0 0;
-  overflow: hidden;
 }
 
 .hero {
@@ -26,8 +22,8 @@
   background-size: 150% 100%;
   background-repeat: no-repeat;
   border-radius: 0 0 400px 0;
-  color: white;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  color: rgb(56, 56, 56);
+  box-shadow: 0 15px 40px rgba(255, 255, 255, 0.15);
 }
 
 .hero h1 {
@@ -43,7 +39,7 @@
 .section {
   height: 100%;
   text-align: center;
-  margin-top: 200px;
+  margin-top: 100px;
 }
 
 .mission {
@@ -56,20 +52,22 @@
   font-size: 28px;
   margin-bottom: 12px;
 
-  background: linear-gradient(45deg, #6c63ff, #00c6ff);
+  background: linear-gradient(45deg, #5951f7, #00b3ff);
   background-clip: text;
-  -webkit-background-clip: text;
-
-  color: transparent;
-  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text; 
+   color: transparent;
 }
 
 .section p {
-  color: rgb(75, 85, 99);
+  color: rgb(86, 85, 85);
   font-size: 15px;
   line-height: 1.6;
   max-width: 800px;
   margin: auto;
+}
+
+.mate{
+  color: rgb(255, 128, 0);
 }
 
 .featureContainer{
