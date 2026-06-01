@@ -5,7 +5,7 @@
 
 .hero {
   height: 70vh;
-  background: url("tour1.jpg");
+  background: url("../../assets/tour1.jpg");
   background-position: center;
   display: flex;
   align-items: center;
