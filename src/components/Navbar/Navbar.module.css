@@ -1,7 +1,7 @@
 .header {
-  /* position: sticky;
+  position: sticky;
   top: 0;
-  z-index: 1000; */
+  z-index: 1000;
   display: flex;
   padding-top: 10px;
   padding-left: 10px;
@@ -37,9 +37,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: rgb(226, 237, 239);
+  background-color: rgba(3, 181, 252, 0.452);
   border-radius: 50px 0 0 0;
-  border-bottom: 2px solid rgb(178, 221, 172);
 }
 
 .logo {
@@ -166,7 +165,7 @@
 }
 
 .navLinks a:hover {
-  color: rgb(0, 123, 255);
+  color: rgb(0, 42, 255);
 }
 
 .navLinks a::after {
@@ -304,6 +303,8 @@
     flex-direction: column;
     gap: 15px;
     padding: 10px 5%;
+    margin-bottom: -10px;
+    margin-right: -10px
   }
 
   .navLinks {

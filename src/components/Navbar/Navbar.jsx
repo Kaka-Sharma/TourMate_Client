@@ -5,7 +5,7 @@ import { FiSearch } from "react-icons/fi";
 import { useAuth } from "../../context/AuthContext";
 import { logoutUser } from "../../api/api";
 import Logo from "../../assets/TourmateLogo.png";
-import {FaPlaneDeparture } from "react-icons/fa";
+import { FaPlaneDeparture } from "react-icons/fa";
 const Navbar = () => {
   const navigate = useNavigate();
   const { user, loading, logout } = useAuth();
@@ -43,7 +43,9 @@ const Navbar = () => {
       <header className={styles.header}>
         <div className={styles.logo}>
           <h2 className={styles.tour}>
-            <img src={Logo} alt="Logo" />
+            <Link to="/">
+              <img src={Logo} alt="Logo" />
+            </Link>
           </h2>
         </div>
         <div className={styles.mainContainer}>
